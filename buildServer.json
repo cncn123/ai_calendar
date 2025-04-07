@@ -12,8 +12,8 @@
 	"argv": [
 		"/opt/homebrew/bin/xcode-build-server"
 	],
-	"workspace": "/Users/bobby/iosApp/ai_calendar/ai_calendar.xcodeproj/project.xcworkspace",
-	"build_root": "/Users/bobby/Library/Developer/Xcode/DerivedData/ai_calendar-bfaiwnwkysifeffpelefrqnqxfjs",
+	"workspace": "/Users/p4894_1/ai_calendar/ai_calendar.xcodeproj/project.xcworkspace",
+	"build_root": "/Users/p4894_1/Library/Developer/Xcode/DerivedData/ai_calendar-bqurabwjjufsgsdfoynwhxdfpndi",
 	"scheme": "ai_calendar",
 	"kind": "xcode"
 }

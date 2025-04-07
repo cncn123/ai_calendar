@@ -1,0 +1,52 @@
+{
+  "2025": [
+    {
+      "name": "元旦",
+      "date": "2025-01-01",
+      "type": "national",
+      "description": "新年的第一天",
+      "duration": 1,
+      "region": "hongKong",
+      "adjustments": {
+        "holidays": ["2025-01-01"],
+        "workdays": []
+      }
+    },
+    {
+      "name": "春节",
+      "date": "2025-01-29",
+      "type": "traditional",
+      "description": "2025年农历正月初一—是公历1月29日，放假3天（正月初一至初三）。",
+      "duration": 3,
+      "region": "hongKong",
+      "adjustments": {
+        "holidays": ["2025-01-29", "2025-01-30", "2025-01-31"],
+        "workdays": []
+      }
+    },
+    {
+      "name": "清明节",
+      "date": "2025-04-04",
+      "type": "traditional",
+      "description": "清明日",
+      "duration": 1,
+      "region": "hongKong",
+      "adjustments": {
+        "holidays": ["2025-04-04"],
+        "workdays": []
+      }
+    },
+    {
+      "name": "耶稣受难节",
+      "date": "2025-04-18",
+      "type": "international",
+      "description": "纪念耶稣被钉十字架而死。复活节前两天的星期五是受难节。",
+      "duration": 1,
+      "region": "hongKong",
+      "adjustments": {
+        "holidays": ["2025-04-18"],
+        "workdays": []
+      }
+    }
+  ]
+}
