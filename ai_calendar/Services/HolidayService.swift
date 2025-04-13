@@ -124,22 +124,6 @@ class HolidayService {
                 region: .hongKong
             ),
             Holiday(
-                name: "复活节星期二",
-                date: Date.from(year: year, month: 4, day:  22), // 2025年复活节星期一是4月21日
-                type: .international,
-                description: "纪念耶稣被钉十字架而死后复活的奇迹。复活节是在每年春分之后第一次满月之后的第一个星期日。",
-                duration: 1,
-                region: .hongKong
-            ),
-            Holiday(
-                name: "复活节星期三",
-                date: Date.from(year: year, month: 4, day:  23), // 2025年复活节星期一是4月21日
-                type: .international,
-                description: "纪念耶稣被钉十字架而死后复活的奇迹。复活节是在每年春分之后第一次满月之后的第一个星期日。",
-                duration: 1,
-                region: .hongKong
-            ),
-            Holiday(
                 name: "劳动节",
                 date: Date.from(year: year, month: 5, day: 1),
                 type: .national,
@@ -211,6 +195,7 @@ class HolidayService {
                 duration: 1,
                 region: .hongKong
             )
+            
         ]
     }
     
