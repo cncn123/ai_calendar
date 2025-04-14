@@ -20,27 +20,15 @@ struct CalendarHeaderView: View {
 
             Spacer()
             
-            // 地区选择按钮
-            HStack(spacing: 12) {
-                ForEach([nil,  Holiday.Region.hongKong, Holiday.Region.mainland], id: \.self) { region in
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            viewModel.selectedRegion = region
-                        }
-                    }) {
-                        Text(region?.rawValue ?? "全部")
-                            .font(.system(size: 14, weight: .medium))
-                            .padding(.horizontal, 16)
-                            .frame(height: 36)
-                            .background(viewModel.selectedRegion == region ? Color.blue : Color(.systemGray6))
-                            .foregroundColor(viewModel.selectedRegion == region ? .white : .primary)
-                            .clipShape(Capsule())
-                            .accessibilityLabel("\(region?.rawValue ?? "全部")地区")
-                    }
-                }
+            // 地区选择
+            Picker("地区", selection: $viewModel.selectedRegion) {
+                Text("全部").tag(Optional<Holiday.Region>.none)
+                Text("香港").tag(Optional<Holiday.Region>.some(.hongKong))
+                Text("内地").tag(Optional<Holiday.Region>.some(.mainland))
             }
-            .padding(.trailing, 16)
+            .pickerStyle(.segmented)
             .frame(width: 220)
+            .padding(.trailing, 16)
         }
         .padding(.vertical, 10)
         .background(Color(.systemBackground))
