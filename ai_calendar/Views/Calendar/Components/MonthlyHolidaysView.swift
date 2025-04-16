@@ -57,10 +57,10 @@ struct MonthlyHolidaysView: View {
                             ForEach(monthHolidays) { holiday in
                                 HolidayInfoCard(
                                     holiday: holiday,
-                                    isSelected: viewModel.isSameDay(holiday.date, viewModel.selectedDate)
+                                    isSelected: viewModel.isSameDay(holiday.startDate, viewModel.selectedDate)
                                 )
                                     .frame(maxWidth: .infinity)
-                                    .id("\(holiday.name)_\(holiday.date)") // 使用节假日名称和日期组合作为稳定的id
+                                    .id("\(holiday.name)_\(holiday.startDate)") // 使用节假日名称和日期组合作为稳定的id
                             }
                         }
                         .padding(.horizontal)
@@ -70,7 +70,7 @@ struct MonthlyHolidaysView: View {
                         if let holiday = viewModel.getFilteredHoliday(for: newDate) {
                             // 延迟一帧以确保布局已完成
                             DispatchQueue.main.async {
-                                let holidayId = "\(holiday.name)_\(holiday.date)"
+                                let holidayId = "\(holiday.name)_\(holiday.startDate)"
                                 // 使用动画效果滚动到对应的节假日卡片
                                 withAnimation(.easeInOut(duration: 0.3)) {
                                     // 滚动到对应的节假日卡片，使用center锚点确保完整显示

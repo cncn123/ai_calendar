@@ -29,6 +29,9 @@ struct CalendarHeaderView: View {
             .pickerStyle(.segmented)
             .frame(width: 220)
             .padding(.trailing, 16)
+            .onChange(of: viewModel.selectedRegion) { oldValue, newValue in
+                print("地区选择已更改: \(String(describing: newValue))")
+            }
         }
         .padding(.vertical, 10)
         .background(Color(.systemBackground))

@@ -116,10 +116,10 @@ class CalendarViewModel: ObservableObject {
         // 如果选择了地区，则过滤
         if let region = selectedRegion {
             return holidays.filter { $0.region == region }
-                          .sorted { $0.date < $1.date }
+                          .sorted(by: { $0.startDate < $1.startDate })
         }
         
         // 否则返回所有节假日
-        return holidays.sorted { $0.date < $1.date }
+        return holidays.sorted(by: { $0.startDate < $1.startDate })
     }
 }
