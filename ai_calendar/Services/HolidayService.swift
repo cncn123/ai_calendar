@@ -47,14 +47,14 @@ class HolidayService {
     
     // 获取所有节假日
     func getAllHolidays(for year: Int = Calendar.current.component(.year, from: Date())) -> [Holiday] {
-        let hongKongHolidays = loadHolidays(from: "cal_hk_holiday", region: .hongKong)
+        let hongKongHolidays = loadHolidays(from: "hk_holiday/cal_hk_holiday", region: .hongKong)
         print("加载的香港节假日数量: \(hongKongHolidays.count)")
         return hongKongHolidays
     }
     
     // 获取香港节假日
     func getHongKongHolidays(for year: Int = Calendar.current.component(.year, from: Date())) -> [Holiday] {
-        let holidays = loadHolidays(from: "cal_hk_holiday", region: .hongKong)
+        let holidays = loadHolidays(from: "hk_holiday/cal_hk_holiday", region: .hongKong)
         print("加载的香港节假日数量: \(holidays.count)")
         return holidays
     }
