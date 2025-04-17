@@ -60,9 +60,14 @@ ai_calendar/
 │           ├── HolidayInfoCard.swift
 │           └── MonthlyHolidaysView.swift
 └── Data/
-    └── hk_holiday/
-        ├── cal_hk_holiday.json
-        └── 1823_cal_dictionary.pdf
+    ├── hk_holiday/
+    │   ├── cal_hk_holiday.json
+    │   └── 1823_cal_dictionary.pdf
+    └── mainland_holiday/
+        ├── 2023.json
+        ├── 2024.json
+        ├── 2025.json
+        └── schema.json
 ```
 
 ## 贡献指南
