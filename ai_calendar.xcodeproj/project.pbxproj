@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C5B37DA42DB299DC00E770DA /* cal_hk_holiday.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9B2DB299DC00E770DA /* cal_hk_holiday.json */; };
+		C5B37DA52DB299DC00E770DA /* 1823_cal_dictionary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9A2DB299DC00E770DA /* 1823_cal_dictionary.pdf */; };
+		C5B37DA62DB299DC00E770DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37DA02DB299DC00E770DA /* schema.json */; };
+		C5B37DA72DB299DC00E770DA /* 2025.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9F2DB299DC00E770DA /* 2025.json */; };
+		C5B37DA82DB299DC00E770DA /* 2024.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9E2DB299DC00E770DA /* 2024.json */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C531F48C2D7C892E00D405F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +35,34 @@
 		C531F47B2D7C892C00D405F0 /* ai_calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ai_calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C531F48B2D7C892E00D405F0 /* ai_calendarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ai_calendarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C531F4952D7C892E00D405F0 /* ai_calendarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ai_calendarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5B37D9A2DB299DC00E770DA /* 1823_cal_dictionary.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 1823_cal_dictionary.pdf; sourceTree = "<group>"; };
+		C5B37D9B2DB299DC00E770DA /* cal_hk_holiday.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cal_hk_holiday.json; sourceTree = "<group>"; };
+		C5B37D9D2DB299DC00E770DA /* 2023.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2023.json; sourceTree = "<group>"; };
+		C5B37D9E2DB299DC00E770DA /* 2024.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2024.json; sourceTree = "<group>"; };
+		C5B37D9F2DB299DC00E770DA /* 2025.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2025.json; sourceTree = "<group>"; };
+		C5B37DA02DB299DC00E770DA /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C5B37DA92DB29B4200E770DA /* Exceptions for "ai_calendar" folder in "ai_calendar" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Data/hk_holiday/1823_cal_dictionary.pdf,
+				Data/hk_holiday/cal_hk_holiday.json,
+				Data/mainland_holiday/2024.json,
+				Data/mainland_holiday/2025.json,
+				Data/mainland_holiday/schema.json,
+			);
+			target = C531F47A2D7C892C00D405F0 /* ai_calendar */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C531F47D2D7C892C00D405F0 /* ai_calendar */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C5B37DA92DB29B4200E770DA /* Exceptions for "ai_calendar" folder in "ai_calendar" target */,
+			);
 			path = ai_calendar;
 			sourceTree = "<group>";
 		};
@@ -75,6 +106,7 @@
 		C531F4722D7C892C00D405F0 = {
 			isa = PBXGroup;
 			children = (
+				C5B37DA22DB299DC00E770DA /* Data */,
 				C531F47D2D7C892C00D405F0 /* ai_calendar */,
 				C531F48E2D7C892E00D405F0 /* ai_calendarTests */,
 				C531F4982D7C892E00D405F0 /* ai_calendarUITests */,
@@ -90,6 +122,35 @@
 				C531F4952D7C892E00D405F0 /* ai_calendarUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C5B37D9C2DB299DC00E770DA /* hk_holiday */ = {
+			isa = PBXGroup;
+			children = (
+				C5B37D9A2DB299DC00E770DA /* 1823_cal_dictionary.pdf */,
+				C5B37D9B2DB299DC00E770DA /* cal_hk_holiday.json */,
+			);
+			path = hk_holiday;
+			sourceTree = "<group>";
+		};
+		C5B37DA12DB299DC00E770DA /* mainland_holiday */ = {
+			isa = PBXGroup;
+			children = (
+				C5B37D9D2DB299DC00E770DA /* 2023.json */,
+				C5B37D9E2DB299DC00E770DA /* 2024.json */,
+				C5B37D9F2DB299DC00E770DA /* 2025.json */,
+				C5B37DA02DB299DC00E770DA /* schema.json */,
+			);
+			path = mainland_holiday;
+			sourceTree = "<group>";
+		};
+		C5B37DA22DB299DC00E770DA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C5B37D9C2DB299DC00E770DA /* hk_holiday */,
+				C5B37DA12DB299DC00E770DA /* mainland_holiday */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5B37DA42DB299DC00E770DA /* cal_hk_holiday.json in Resources */,
+				C5B37DA52DB299DC00E770DA /* 1823_cal_dictionary.pdf in Resources */,
+				C5B37DA62DB299DC00E770DA /* schema.json in Resources */,
+				C5B37DA72DB299DC00E770DA /* 2025.json in Resources */,
+				C5B37DA82DB299DC00E770DA /* 2024.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ai_calendar/Preview Content\"";
+				DEVELOPMENT_TEAM = W2HLB352ZX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -424,6 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ai_calendar/Preview Content\"";
+				DEVELOPMENT_TEAM = W2HLB352ZX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
