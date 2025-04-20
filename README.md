@@ -4,6 +4,12 @@
 
 ## 最新更新
 
+### 2024-04-20
+- 新增节假日一览页面，按月份顺序列出所有节假日
+- 优化多地区节假日卡片布局，香港和内地节假日信息并排显示
+- 改进节假日卡片选中状态的渐变虚线效果
+- 优化节假日信息卡片，仅显示开始日期和持续天数
+
 ### 2024-04-16
 - 修复了香港节假日数据加载问题
 - 优化了节假日日期显示格式
@@ -14,10 +20,11 @@
 
 - 显示香港和内地节假日
 - 支持按地区筛选节假日
+- 节假日一览页面，按月份顺序展示全年节假日
 - 显示节假日详细信息，包括：
   - 节假日名称
   - 地区信息
-  - 起止日期
+  - 起始日期和持续天数
   - 星期几
 - 支持月份切换
 - 支持日期选择
@@ -52,16 +59,22 @@ ai_calendar/
 ├── Services/
 │   └── HolidayService.swift
 ├── Views/
+│   ├── HolidayListView.swift
 │   └── Calendar/
 │       ├── CalendarView.swift
 │       └── Components/
 │           ├── CalendarHeaderView.swift
 │           ├── CalendarGridView.swift
 │           ├── HolidayInfoCard.swift
+│           ├── MultiRegionHolidayCard.swift
 │           └── MonthlyHolidaysView.swift
 └── Data/
     ├── hk_holiday/
     │   ├── cal_hk_holiday.json
+    │   ├── yearly/
+    │   │   ├── hk_holidays_sc_2023.json
+    │   │   ├── hk_holidays_sc_2024.json
+    │   │   └── hk_holidays_sc_2025.json
     │   └── 1823_cal_dictionary.pdf
     └── mainland_holiday/
         ├── 2023.json
