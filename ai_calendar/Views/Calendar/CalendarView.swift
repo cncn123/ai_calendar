@@ -15,7 +15,7 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // 顶部栏
+                // 顶部栏 - 包含标题和地区选择器
                 CalendarHeaderView(viewModel: viewModel)
                 
                 // 月份选择器
@@ -32,6 +32,23 @@ struct CalendarView: View {
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)
             .animation(.easeInOut, value: viewModel.selectedRegion)
+            .onAppear {
+                // 清除缓存并重新加载数据
+                HolidayService.shared.clearCache()
+                viewModel.loadHolidays()
+            }
+            // 监听月份变化
+            .onChange(of: viewModel.currentMonth) { _, _ in
+                viewModel.refreshMonthHolidays()
+            }
+            // 监听年份变化
+            .onChange(of: viewModel.currentYear) { _, _ in
+                viewModel.refreshMonthHolidays()
+            }
+            // 监听地区筛选变化
+            .onChange(of: viewModel.selectedRegion) { _, _ in
+                viewModel.refreshMonthHolidays()
+            }
         }
     }
 }

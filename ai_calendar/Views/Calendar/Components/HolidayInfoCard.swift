@@ -54,27 +54,32 @@ struct HolidayInfoCard: View {
     // 右侧信息区域视图
     private var infoBlock: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(holiday.name)
-                .font(.headline)
-                .foregroundColor(.primary)
-            
             HStack {
+                Text(holiday.name)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                Spacer()
+                
+                // 显示地区标签
                 Text(holiday.region.rawValue)
                     .font(.caption)
                     .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(getHolidayColor().opacity(0.1))
+                    .padding(.vertical, 3)
+                    .background(getHolidayColor().opacity(0.2))
+                    .foregroundColor(getHolidayColor())
                     .cornerRadius(4)
+            }
+            
+            HStack {
+                // 显示开始日期和结束日期
+                Text(formatDate(holiday.startDate))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 
-                if duration > 1 {
-                    Text("\(formatDate(holiday.startDate)) - \(formatDate(holiday.endDate))")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                } else {
-                    Text(formatDate(holiday.startDate))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
+                Text(formatDate(holiday.endDate))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 
                 Spacer()
                 
@@ -93,34 +98,38 @@ struct HolidayInfoCard: View {
     // 选中状态边框
     private var selectionOverlay: some View {
         RoundedRectangle(cornerRadius: 8)
-            .stroke(isSelected ? getHolidayColor() : Color.clear, lineWidth: 2)
+            .strokeBorder(
+                style: StrokeStyle(
+                    lineWidth: 1.5,
+                    dash: [5, 3]
+                )
+            )
+            .foregroundColor(isSelected ? getHolidayColor() : Color.clear)
     }
     
-    // 选中状态背景
+    // 选中状态背景 - 移除背景颜色，保持透明
     private var selectionBackground: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(isSelected ? getHolidayColor().opacity(0.05) : Color.clear)
+            .fill(Color.clear)
     }
     
     // 创建无障碍标签
     private func createAccessibilityLabel() -> String {
         let weekday = getWeekday(from: holiday.startDate)
-        let region = holiday.region.rawValue
         let durationText = "\(duration)天假期"
         let selectedStatus = isSelected ? ", 当前选中" : ""
         
-        return "\(holiday.name), \(weekday), \(region), \(durationText)\(selectedStatus)"
+        return "\(holiday.name), \(holiday.region.rawValue), \(weekday), \(durationText)\(selectedStatus)"
     }
     
     // 获取节假日颜色
     private func getHolidayColor() -> Color {
+        // 根据假日地区设置不同颜色
         switch holiday.region {
-        case .mainland:
-            return .red
         case .hongKong:
-            return .blue
-        case .both:
-            return .purple
+            return AppColors.hongKongBlue
+        case .mainland:
+            return AppColors.mainlandRed
         }
     }
     

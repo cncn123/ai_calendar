@@ -32,8 +32,9 @@ struct CalendarGridView: View {
                         DayCell(
                             date: date,
                             isSelected: viewModel.isSameDay(date, viewModel.selectedDate),
-                            holiday: viewModel.getFilteredHoliday(for: date),
-                            onTap: { viewModel.selectedDate = date }
+                            holiday: viewModel.getHoliday(for: date),
+                            onTap: { viewModel.selectedDate = date },
+                            viewModel: viewModel
                         )
                     } else {
                         Color.clear

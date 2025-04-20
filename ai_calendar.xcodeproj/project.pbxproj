@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5B37DA42DB299DC00E770DA /* cal_hk_holiday.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9B2DB299DC00E770DA /* cal_hk_holiday.json */; };
-		C5B37DA52DB299DC00E770DA /* 1823_cal_dictionary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9A2DB299DC00E770DA /* 1823_cal_dictionary.pdf */; };
 		C5B37DA62DB299DC00E770DA /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37DA02DB299DC00E770DA /* schema.json */; };
-		C5B37DA72DB299DC00E770DA /* 2025.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9F2DB299DC00E770DA /* 2025.json */; };
-		C5B37DA82DB299DC00E770DA /* 2024.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B37D9E2DB299DC00E770DA /* 2024.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +44,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Data/hk_holiday/1823_cal_dictionary.pdf,
-				Data/hk_holiday/cal_hk_holiday.json,
-				Data/mainland_holiday/2024.json,
-				Data/mainland_holiday/2025.json,
+				Data/hk_holiday/hk_holidays_sc_2023_2025.json,
 				Data/mainland_holiday/schema.json,
 			);
 			target = C531F47A2D7C892C00D405F0 /* ai_calendar */;
@@ -273,11 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5B37DA42DB299DC00E770DA /* cal_hk_holiday.json in Resources */,
-				C5B37DA52DB299DC00E770DA /* 1823_cal_dictionary.pdf in Resources */,
 				C5B37DA62DB299DC00E770DA /* schema.json in Resources */,
-				C5B37DA72DB299DC00E770DA /* 2025.json in Resources */,
-				C5B37DA82DB299DC00E770DA /* 2024.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,71 +12,38 @@ struct Holiday: Identifiable, Codable {
     var name: String // 节假日名称
     var startDate: Date // 开始日期
     var endDate: Date // 结束日期
-    var region: Region // 适用地区
+    var region: HolidayRegion // 地区信息
     
-    // 节假日类型
-    enum HolidayType: String, CaseIterable, Identifiable, Codable {
-        case national = "国家法定节假日"
-        case traditional = "传统节日"
-        case international = "国际节日"
-        case memorial = "纪念日"
-        
-        var id: String { self.rawValue }
-    }
-    
-    // 地区
-    enum Region: String, CaseIterable, Identifiable, Codable {
-        case mainland = "内地"
-        case hongKong = "香港"
-        case both = "内地和香港"
-        
-        var id: String { self.rawValue }
-    }
-    
-    // 从 vevent 数据创建 Holiday
-    init(from vevent: VEvent, region: Region) {
+    // 从 vevent 数据创建香港假日
+    init(from vevent: VEvent) {
         self.id = vevent.uid
         self.name = vevent.summary
         self.startDate = vevent.dtstart.date
         self.endDate = vevent.dtend.date
-        self.region = region
+        self.region = .hongKong
     }
     
-    // 获取节假日描述
-    private func getDescription(for name: String) -> String {
-        switch name {
-        case "一月一日", "一月一日翌日":
-            return "新年的第一天"
-        case "农历年初一", "农历年初二", "农历年初三", "农历年初四":
-            return "中国农历新年，是中国最重要的传统节日"
-        case "清明节":
-            return "扫墓祭祖的传统节日"
-        case "耶稣受难节", "耶稣受难节翌日":
-            return "纪念耶稣被钉十字架而死"
-        case "复活节星期一":
-            return "纪念耶稣被钉十字架而死后复活的奇迹"
-        case "劳动节":
-            return "国际劳动节"
-        case "佛诞":
-            return "农历4月8日，纪念佛祖诞辰"
-        case "端午节":
-            return "纪念屈原的传统节日，有吃粽子、赛龙舟等习俗"
-        case "香港特别行政区成立纪念日":
-            return "纪念香港回归"
-        case "中秋节翌日":
-            return "农历8月15日（中秋节）的翌日"
-        case "国庆日", "国庆节翌日":
-            return "庆祝中华人民共和国成立"
-        case "重阳节":
-            return "农历9月9日，又称秋祭"
-        case "圣诞节":
-            return "纪念耶稣基督诞生的节日"
-        case "圣诞节后第一个周日":
-            return "圣诞节后的第一个周日"
-        default:
-            return name
-        }
+    // 从内地假日数据创建假日
+    init(from mainlandDay: MainlandHolidayDay, year: Int) {
+        self.id = "mainland_\(mainlandDay.date)"
+        self.name = mainlandDay.name
+        
+        // 解析日期 (YYYY-MM-DD 格式)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Shanghai")
+        self.startDate = dateFormatter.date(from: mainlandDay.date) ?? Date()
+        
+        // 结束日期设为开始日期后一天
+        self.endDate = Calendar.current.date(byAdding: .day, value: 1, to: startDate) ?? Date()
+        self.region = .mainland
     }
+}
+
+// 假日区域枚举
+enum HolidayRegion: String, Codable {
+    case hongKong = "香港"
+    case mainland = "内地"
 }
 
 // vevent 数据结构
@@ -148,6 +115,18 @@ struct VCalendar: Codable {
     }
 }
 
+// 内地节假日数据结构
+struct MainlandHolidayData: Codable {
+    let year: Int
+    let days: [MainlandHolidayDay]
+}
+
+struct MainlandHolidayDay: Codable {
+    let name: String
+    let date: String
+    let isOffDay: Bool
+}
+
 // 扩展Date以便于处理日期
 extension Date {
     static func from(year: Int, month: Int, day: Int) -> Date {
@@ -169,5 +148,11 @@ extension Date {
     
     var year: Int {
         return Calendar.current.component(.year, from: self)
+    }
+    
+    var formattedForID: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.string(from: self)
     }
 }
