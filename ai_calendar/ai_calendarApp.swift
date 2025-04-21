@@ -11,7 +11,7 @@ import SwiftUI
 struct ai_calendarApp: App {
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            SplashScreenView()
         }
     }
 }

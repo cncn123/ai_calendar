@@ -10,20 +10,20 @@ import SwiftUI
 // MARK: - 当月节假日列表视图
 struct MonthlyHolidaysView: View {
     @ObservedObject var viewModel: CalendarViewModel
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             let monthHolidays = viewModel.getCurrentMonthHolidays()
-
+            
             // 计算分地区节假日数量
             let regionCounts = calculateRegionCounts(
                 holidays: viewModel.getHolidaysForMonth(
                     month: viewModel.currentMonth, year: viewModel.currentYear))
 
             VStack(alignment: .leading, spacing: 6) {
-                HStack(spacing: 8) {
-                    Text("当月节假日")
-                        .font(.headline)
+            HStack(spacing: 8) {
+                Text("当月节假日")
+                    .font(.headline)
                     // 地区节假日数量显示
                     HStack(spacing: 12) {
                         if regionCounts.hkCount > 0 {
@@ -53,10 +53,10 @@ struct MonthlyHolidaysView: View {
                         if regionCounts.multiRegionDates > 0 && viewModel.selectedRegion == nil {
                             HStack(spacing: 4) {
                                 Text("共同：\(regionCounts.multiRegionDates)")
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
+                        .font(.caption)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
                                     .background(
                                         LinearGradient(
                                             gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
@@ -64,7 +64,7 @@ struct MonthlyHolidaysView: View {
                                             endPoint: .trailing
                                         )
                                     )
-                                    .clipShape(Capsule())
+                        .clipShape(Capsule())
                             }
                         }
                     }
@@ -75,7 +75,7 @@ struct MonthlyHolidaysView: View {
                 )
 
             }
-
+            
             if monthHolidays.isEmpty {
                 Text("本月暂无节假日")
                     .foregroundColor(.secondary)
@@ -93,11 +93,11 @@ struct MonthlyHolidaysView: View {
                             ForEach(monthHolidays) { holiday in
                                 // 如果选择了特定地区，直接显示对应节假日
                                 if viewModel.selectedRegion != nil {
-                                    HolidayInfoCard(
-                                        holiday: holiday,
+                                HolidayInfoCard(
+                                    holiday: holiday,
                                         isSelected: viewModel.isSameDay(
                                             holiday.startDate, viewModel.selectedDate)
-                                    )
+                                )
                                     .frame(maxWidth: .infinity)
                                     .id("\(holiday.id)")  // 使用节假日唯一ID作为视图ID
                                     .onTapGesture {
@@ -212,29 +212,29 @@ struct MonthlyHolidaysView: View {
 
 // MARK: - 预览提供者
 #if DEBUG
-    struct MonthlyHolidaysView_Previews: PreviewProvider {
-        static var previews: some View {
-            // 创建模拟的CalendarViewModel
-            let viewModel = CalendarViewModel()
-
-            // 设置当前日期为预览日期
-            return Group {
-                // 预览1：默认状态
-                MonthlyHolidaysView(viewModel: viewModel)
-                    .previewDisplayName("默认状态")
-                    .preferredColorScheme(.light)
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .previewLayout(.sizeThatFits)
-
-                // 预览2：暗黑模式
-                MonthlyHolidaysView(viewModel: viewModel)
-                    .previewDisplayName("暗黑模式")
-                    .preferredColorScheme(.dark)
-                    .padding()
-                    .background(Color(.systemBackground))
-                    .previewLayout(.sizeThatFits)
-            }
+struct MonthlyHolidaysView_Previews: PreviewProvider {
+    static var previews: some View {
+        // 创建模拟的CalendarViewModel
+        let viewModel = CalendarViewModel()
+        
+        // 设置当前日期为预览日期
+        return Group {
+            // 预览1：默认状态
+            MonthlyHolidaysView(viewModel: viewModel)
+                .previewDisplayName("默认状态")
+                .preferredColorScheme(.light)
+                .padding()
+                .background(Color(.systemBackground))
+                .previewLayout(.sizeThatFits)
+            
+            // 预览2：暗黑模式
+            MonthlyHolidaysView(viewModel: viewModel)
+                .previewDisplayName("暗黑模式")
+                .preferredColorScheme(.dark)
+                .padding()
+                .background(Color(.systemBackground))
+                .previewLayout(.sizeThatFits)
         }
     }
+}
 #endif

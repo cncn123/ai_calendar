@@ -66,13 +66,13 @@ struct MultiRegionHolidayCard: View {
                 // 香港节假日信息
                 HStack(spacing: 4) {
                     Text(hkHoliday.name)
-                        .font(.subheadline)
+                        .font(.headline)
                         .foregroundColor(.primary)
                         .lineLimit(1)
                     
                     // 香港标签
                     Text(hkHoliday.region.rawValue)
-                        .font(.caption2)
+                        .font(.caption)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 1)
                         .background(AppColors.hongKongBlue.opacity(0.2))
@@ -85,13 +85,13 @@ struct MultiRegionHolidayCard: View {
                 // 内地节假日信息
                 HStack(spacing: 4) {
                     Text(mlHoliday.name)
-                        .font(.subheadline)
+                        .font(.headline)
                         .foregroundColor(.primary)
                         .lineLimit(1)
                     
                     // 内地标签
                     Text(mlHoliday.region.rawValue)
-                        .font(.caption2)
+                        .font(.caption)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 1)
                         .background(AppColors.mainlandRed.opacity(0.2))

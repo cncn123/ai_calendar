@@ -59,8 +59,6 @@ struct HolidayInfoCard: View {
                     .font(.headline)
                     .foregroundColor(.primary)
                 
-                Spacer()
-                
                 // 显示地区标签
                 Text(holiday.region.rawValue)
                     .font(.caption)
@@ -72,14 +70,15 @@ struct HolidayInfoCard: View {
             }
             
             HStack {
-                // 显示开始日期和结束日期
+                // 显示开始日期
                 Text(formatDate(holiday.startDate))
                     .font(.caption)
                     .foregroundColor(.secondary)
                 
-                Text(formatDate(holiday.endDate))
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // // 显示结束日期
+                // Text(formatDate(holiday.endDate))
+                //     .font(.caption)
+                //     .foregroundColor(.secondary)
                 
                 Spacer()
                 

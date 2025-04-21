@@ -13,10 +13,10 @@ struct CalendarHeaderView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-                Text("节假日日历")
-                    .font(.headline)
-                    .accessibilityLabel("节假日日历")
-                Spacer()
+            Text("节假日日历")
+                .font(.headline)
+                .accessibilityLabel("节假日日历")
+            Spacer()
                 regionSelector
         }
         .padding(.horizontal)
