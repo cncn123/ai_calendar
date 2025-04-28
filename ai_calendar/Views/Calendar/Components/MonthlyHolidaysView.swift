@@ -23,7 +23,8 @@ struct MonthlyHolidaysView: View {
             VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
                 Text("当月节假日")
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.bold)
                     // 地区节假日数量显示
                     HStack(spacing: 12) {
                         if regionCounts.hkCount > 0 {

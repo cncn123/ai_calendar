@@ -14,7 +14,8 @@ struct CalendarHeaderView: View {
     var body: some View {
         HStack(spacing: 0) {
             Text("节假日日历")
-                .font(.headline)
+                .font(.title2)
+                .fontWeight(.bold)
                 .accessibilityLabel("节假日日历")
             Spacer()
                 regionSelector

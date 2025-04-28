@@ -41,7 +41,7 @@ struct HolidayListView: View {
             // 第一行：标题和地区选择器
             HStack {
                 Text("节假日一览")
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.bold)
                 
                 Spacer()
@@ -71,7 +71,7 @@ struct HolidayListView: View {
                     Spacer()
                     
                     Text("\(String(selectedYear)) 年")
-                        .font(.headline)
+                        .font(.title3)
                         .foregroundColor(Color.blue)
                         .frame(minWidth: 60)
                     
@@ -151,7 +151,7 @@ struct HolidayListView: View {
     private func monthSection(month: Int) -> some View {
         return VStack(alignment: .leading, spacing: 8) {
             Text("\(month) 月")
-                .font(.headline)
+                .font(.title3)
                 .padding(.top, 8)
             
             let monthHolidays = viewModel.getHolidays(for: month)
@@ -160,12 +160,12 @@ struct HolidayListView: View {
                 // 没有符合筛选条件的假期
                 VStack(spacing: 12) {
                     Image(systemName: "calendar.badge.exclamationmark")
-                        .font(.system(size: 28))
+                        .font(.system(size: 24))
                         .foregroundColor(.secondary.opacity(0.7))
                         .padding(.top, 4)
                     
                     Text("本月无符合条件的假期")
-                        .font(.subheadline)
+                        .font(.body)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                 }

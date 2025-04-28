@@ -71,7 +71,7 @@ struct DayCell: View {
                         // 多地区节假日时使用渐变色文本
                         ZStack {
                             Text("\(date.dayOfMonth)")
-                                .font(.system(size: 16, weight: isSelected ? .bold : .regular))
+                                .font(.system(size: 24, weight: isSelected ? .bold : .regular))
                                 .foregroundColor(.clear)
                             
                             // 渐变色蒙版
@@ -82,12 +82,12 @@ struct DayCell: View {
                             )
                             .mask(
                                 Text("\(date.dayOfMonth)")
-                                    .font(.system(size: 16, weight: isSelected ? .bold : .regular))
+                                    .font(.system(size: 24, weight: isSelected ? .bold : .regular))
                             )
                         }
                     } else {
                         Text("\(date.dayOfMonth)")
-                            .font(.system(size: 16, weight: isSelected ? .bold : .regular))
+                            .font(.system(size: 24, weight: isSelected ? .bold : .regular))
                             .foregroundColor(holiday != nil ? getHolidayColor() : .primary)
                     }
                     

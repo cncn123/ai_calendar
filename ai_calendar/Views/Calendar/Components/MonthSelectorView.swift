@@ -23,7 +23,8 @@ struct MonthSelectorView: View {
             Spacer()
             
             Text("\(String(viewModel.currentYear))年\(viewModel.currentMonth)月")
-                .font(.headline)
+                .font(.title2)
+                .fontWeight(.bold)
                 .accessibilityLabel("\(viewModel.currentYear)年\(viewModel.currentMonth)月")
             
             Spacer()

@@ -18,7 +18,7 @@ struct CalendarGridView: View {
                 ForEach(viewModel.weekDays, id: \.self) { day in
                     Text(day)
                         .frame(maxWidth: .infinity)
-                        .font(.caption)
+                        .font(.headline)
                         .foregroundColor(.primary)
                         .padding(.vertical, 8)
                 }

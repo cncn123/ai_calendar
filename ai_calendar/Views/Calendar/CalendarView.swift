@@ -20,6 +20,7 @@ struct CalendarView: View {
             VStack(spacing: 0) {
                 // 顶部栏 - 包含标题和地区选择器
                 CalendarHeaderView(viewModel: viewModel)
+                    .padding(.top, 8)  // 增加顶部间距
                 
                 // 月份选择器
                 MonthSelectorView(viewModel: viewModel)
@@ -29,7 +30,7 @@ struct CalendarView: View {
                 
                 // 当月所有节假日卡片
                 MonthlyHolidaysView(viewModel: viewModel)
-                    .id("holidaysView") // 添加ID用于定位视图
+                    .id("holidaysView")
                 
                 Spacer()
             }
