@@ -12,6 +12,8 @@ import Foundation
 struct CalendarView: View {
     @StateObject private var viewModel = CalendarViewModel()
     @State private var hasScrolledToTodayHoliday = false
+    @EnvironmentObject private var themeManager: ThemeManager
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         NavigationView {
@@ -34,6 +36,7 @@ struct CalendarView: View {
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)
             .animation(.easeInOut, value: viewModel.selectedRegion)
+            .preferredColorScheme(themeManager.colorScheme)
             .onAppear {
                 // 清除缓存并重新加载数据
                 HolidayService.shared.clearCache()
@@ -89,4 +92,5 @@ struct CalendarView: View {
 
 #Preview {
     CalendarView()
+        .environmentObject(ThemeManager())
 }

@@ -7,6 +7,7 @@ struct SplashScreenView: View {
     @State private var rotation = -30.0
     @State private var iconScale = 0.5
     @State private var showText = false
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         ZStack {
@@ -86,10 +87,12 @@ struct SplashScreenView: View {
         .fullScreenCover(isPresented: $isActive) {
             // 跳转到主应用界面
             MainTabView()
+                .environmentObject(themeManager)
         }
     }
 }
 
 #Preview {
     SplashScreenView()
+        .environmentObject(ThemeManager())
 } 

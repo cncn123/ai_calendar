@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct ai_calendarApp: App {
+    @StateObject private var themeManager = ThemeManager()
+    
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .environmentObject(themeManager)
+                .preferredColorScheme(themeManager.colorScheme)
         }
     }
 }

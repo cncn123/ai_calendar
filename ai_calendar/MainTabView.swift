@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @EnvironmentObject private var themeManager: ThemeManager
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -35,10 +36,11 @@ struct MainTabView: View {
                     Label("设置", systemImage: "gear")
                 }
                 .tag(3)
-        }
+        }.preferredColorScheme(themeManager.colorScheme)
     }
 }
 
 #Preview {
     MainTabView()
+        .environmentObject(ThemeManager())
 }
