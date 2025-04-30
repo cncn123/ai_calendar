@@ -12,6 +12,7 @@ struct MultiRegionHolidayCard: View {
     let hkHoliday: Holiday  // 香港节假日
     let mlHoliday: Holiday  // 内地节假日
     var isSelected: Bool = false
+    var daysUntilText: String? = nil
     
     // 计算假期天数
     private var duration: Int {
@@ -107,6 +108,25 @@ struct MultiRegionHolidayCard: View {
                     .foregroundColor(.secondary)
                     
                 Spacer()
+                
+                // 显示距离天数
+                if let daysUntilText = daysUntilText {
+                    Text(daysUntilText)
+                        .font(.caption)
+                        .foregroundColor(.primary)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [AppColors.hongKongBlue.opacity(0.1), AppColors.mainlandRed.opacity(0.1)]),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .cornerRadius(4)
+                }
+                
+                Spacer()
             
                 // 显示星期几
                 Text(getWeekday(from: hkHoliday.startDate))
@@ -157,8 +177,9 @@ struct MultiRegionHolidayCard: View {
         let weekday = getWeekday(from: hkHoliday.startDate)
         let durationText = "\(duration)天假期"
         let selectedStatus = isSelected ? ", 当前选中" : ""
+        let daysUntilStatus = daysUntilText.map { ", \($0)" } ?? ""
         
-        return "多地区节假日，香港：\(hkHoliday.name)，内地：\(mlHoliday.name)，\(weekday)，\(durationText)\(selectedStatus)"
+        return "多地区节假日，香港：\(hkHoliday.name)，内地：\(mlHoliday.name)，\(weekday)，\(durationText)\(daysUntilStatus)\(selectedStatus)"
     }
     
     // 获取星期几

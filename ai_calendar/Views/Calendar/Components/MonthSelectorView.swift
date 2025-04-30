@@ -12,7 +12,7 @@ struct MonthSelectorView: View {
     @ObservedObject var viewModel: CalendarViewModel
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             Button(action: viewModel.previousMonth) {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.blue)
@@ -36,6 +36,5 @@ struct MonthSelectorView: View {
             }
             .padding()
         }
-        .padding(.vertical, 8)
     }
 }

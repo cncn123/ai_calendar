@@ -11,6 +11,7 @@ import SwiftUI
 struct HolidayInfoCard: View {
     let holiday: Holiday
     var isSelected: Bool = false
+    var daysUntilText: String? = nil
     
     // 计算假期天数
     private var duration: Int {
@@ -75,10 +76,18 @@ struct HolidayInfoCard: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                 
-                // // 显示结束日期
-                // Text(formatDate(holiday.endDate))
-                //     .font(.caption)
-                //     .foregroundColor(.secondary)
+                Spacer()
+                
+                // 显示距离天数
+                if let daysUntilText = daysUntilText {
+                    Text(daysUntilText)
+                        .font(.caption)
+                        .foregroundColor(getHolidayColor())
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(getHolidayColor().opacity(0.1))
+                        .cornerRadius(4)
+                }
                 
                 Spacer()
                 
@@ -117,8 +126,9 @@ struct HolidayInfoCard: View {
         let weekday = getWeekday(from: holiday.startDate)
         let durationText = "\(duration)天假期"
         let selectedStatus = isSelected ? ", 当前选中" : ""
+        let daysUntilStatus = daysUntilText.map { ", \($0)" } ?? ""
         
-        return "\(holiday.name), \(holiday.region.rawValue), \(weekday), \(durationText)\(selectedStatus)"
+        return "\(holiday.name), \(holiday.region.rawValue), \(weekday), \(durationText)\(daysUntilStatus)\(selectedStatus)"
     }
     
     // 获取节假日颜色
