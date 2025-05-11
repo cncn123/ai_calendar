@@ -63,7 +63,7 @@ class HolidayListViewModel: ObservableObject {
             Calendar.current.isDate($0.startDate, inSameDayAs: date)
         }
         
-        let hkHoliday = holidaysOnDate.first { $0.region == .hongKong }
+        let hkHoliday = holidaysOnDate.first { $0.region == .hongkong }
         let mlHoliday = holidaysOnDate.first { $0.region == .mainland }
         
         return (hkHoliday, mlHoliday)

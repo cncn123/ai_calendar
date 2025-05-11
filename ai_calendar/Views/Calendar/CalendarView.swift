@@ -32,7 +32,6 @@ struct CalendarView: View {
                 MonthlyHolidaysView(viewModel: viewModel)
                     .id("holidaysView")
                 
-                Spacer()
             }
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)

@@ -27,6 +27,7 @@ struct HolidayInfoCard: View {
             
             // 右侧信息区域
             infoBlock
+                .frame(height: 70)
         }
         .frame(height: 70)
         .cornerRadius(8)
@@ -73,7 +74,7 @@ struct HolidayInfoCard: View {
             HStack {
                 // 显示开始日期
                 Text(formatDate(holiday.startDate))
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
                 
                 Spacer()
@@ -82,11 +83,7 @@ struct HolidayInfoCard: View {
                 if let daysUntilText = daysUntilText {
                     Text(daysUntilText)
                         .font(.caption)
-                        .foregroundColor(getHolidayColor())
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(getHolidayColor().opacity(0.1))
-                        .cornerRadius(4)
+                        .foregroundColor(.secondary)
                 }
                 
                 Spacer()
@@ -135,8 +132,8 @@ struct HolidayInfoCard: View {
     private func getHolidayColor() -> Color {
         // 根据假日地区设置不同颜色
         switch holiday.region {
-        case .hongKong:
-            return AppColors.hongKongBlue
+        case .hongkong:
+            return AppColors.hongkongBlue
         case .mainland:
             return AppColors.mainlandRed
         }

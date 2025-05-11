@@ -27,7 +27,7 @@ struct MultiRegionHolidayCard: View {
             dateBlock
             
             // 右侧信息区域
-            infoBlock
+            infoBlock.frame(height: 70)
         }
         .frame(height: 70)  // 稍微增加高度以适应多行内容
         .cornerRadius(8)
@@ -51,7 +51,7 @@ struct MultiRegionHolidayCard: View {
         .frame(width: 70, height: 70)
         .background(
             LinearGradient(
-                gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
+                gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -74,10 +74,10 @@ struct MultiRegionHolidayCard: View {
                     // 香港标签
                     Text(hkHoliday.region.rawValue)
                         .font(.caption)
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 1)
-                        .background(AppColors.hongKongBlue.opacity(0.2))
-                        .foregroundColor(AppColors.hongKongBlue)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(AppColors.hongkongBlue.opacity(0.2))
+                        .foregroundColor(AppColors.hongkongBlue)
                         .cornerRadius(4)
                 }
                 
@@ -93,8 +93,8 @@ struct MultiRegionHolidayCard: View {
                     // 内地标签
                     Text(mlHoliday.region.rawValue)
                         .font(.caption)
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 1)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
                         .background(AppColors.mainlandRed.opacity(0.2))
                         .foregroundColor(AppColors.mainlandRed)
                         .cornerRadius(4)
@@ -104,7 +104,7 @@ struct MultiRegionHolidayCard: View {
             HStack {
                 // 显示日期信息
                 Text(formatDate(hkHoliday.startDate))
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
                     
                 Spacer()
@@ -113,17 +113,7 @@ struct MultiRegionHolidayCard: View {
                 if let daysUntilText = daysUntilText {
                     Text(daysUntilText)
                         .font(.caption)
-                        .foregroundColor(.primary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(
-                            LinearGradient(
-                                gradient: Gradient(colors: [AppColors.hongKongBlue.opacity(0.1), AppColors.mainlandRed.opacity(0.1)]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .cornerRadius(4)
+                        .foregroundColor(.secondary)
                 }
                 
                 Spacer()
@@ -146,7 +136,7 @@ struct MultiRegionHolidayCard: View {
         ZStack {
             if isSelected {
                 LinearGradient(
-                    gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
+                    gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )

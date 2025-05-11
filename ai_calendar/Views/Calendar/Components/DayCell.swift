@@ -22,8 +22,8 @@ struct DayCell: View {
         
         // 根据假日地区设置不同颜色
         switch holiday.region {
-        case .hongKong:
-            return AppColors.hongKongBlue
+        case .hongkong:
+            return AppColors.hongkongBlue
         case .mainland:
             return AppColors.mainlandRed
         }
@@ -33,8 +33,8 @@ struct DayCell: View {
     private func getSelectionColor() -> Color {
         if let holiday = holiday {
             switch holiday.region {
-            case .hongKong:
-                return AppColors.hongKongBlue
+            case .hongkong:
+                return AppColors.hongkongBlue
             case .mainland:
                 return AppColors.mainlandRed
             }
@@ -71,32 +71,52 @@ struct DayCell: View {
                         // 多地区节假日时使用渐变色文本
                         ZStack {
                             Text("\(date.dayOfMonth)")
-                                .font(.system(size: 24, weight: isSelected ? .bold : .regular))
+                                .font(.system(size: 20, weight: isSelected ? .bold : .regular))
                                 .foregroundColor(.clear)
                             
                             // 渐变色蒙版
                             LinearGradient(
-                                gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
+                                gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                             .mask(
                                 Text("\(date.dayOfMonth)")
-                                    .font(.system(size: 24, weight: isSelected ? .bold : .regular))
+                                    .font(.system(size: 20, weight: isSelected ? .bold : .regular))
                             )
                         }
                     } else {
                         Text("\(date.dayOfMonth)")
-                            .font(.system(size: 24, weight: isSelected ? .bold : .regular))
+                            .font(.system(size: 20, weight: isSelected ? .bold : .regular))
                             .foregroundColor(holiday != nil ? getHolidayColor() : .primary)
                     }
                     
                     if let holiday = holiday {
-                        // 当选择了特定地区，显示该地区的节假日名称
-                        Text(holiday.name)
-                            .font(.system(size: 8))
-                            .foregroundColor(getHolidayColor())
-                            .lineLimit(1)
+                        if isMultiRegionHoliday && viewModel.selectedRegion == nil {
+                            // 多地区节假日时，节假日名称用渐变色
+                            ZStack {
+                                Text(holiday.name)
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.clear)
+                                    .lineLimit(1)
+                                LinearGradient(
+                                    gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                                .mask(
+                                    Text(holiday.name)
+                                        .font(.system(size: 10))
+                                        .lineLimit(1)
+                                )
+                            }
+                        } else {
+                            // 单一地区节假日，正常显示
+                            Text(holiday.name)
+                                .font(.system(size: 10))
+                                .foregroundColor(getHolidayColor())
+                                .lineLimit(1)
+                        }
                     } else if isMultiRegionHoliday && viewModel.selectedRegion == nil {
                         // 多地区节假日时显示特殊提示，使用渐变色
                         ZStack {
@@ -107,7 +127,7 @@ struct DayCell: View {
                             
                             // 渐变色蒙版
                             LinearGradient(
-                                gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
+                                gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )

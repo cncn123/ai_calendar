@@ -14,7 +14,7 @@ struct SplashScreenView: View {
             // 背景渐变
             LinearGradient(
                 gradient: Gradient(colors: [
-                    AppColors.hongKongBlue.opacity(0.8),
+                    AppColors.hongkongBlue.opacity(0.8),
                     AppColors.mainlandRed.opacity(0.8)
                 ]),
                 startPoint: .topLeading,

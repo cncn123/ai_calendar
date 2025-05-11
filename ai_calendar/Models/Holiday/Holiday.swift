@@ -20,7 +20,7 @@ struct Holiday: Identifiable, Codable {
         self.name = vevent.summary
         self.startDate = vevent.dtstart.date
         self.endDate = vevent.dtend.date
-        self.region = .hongKong
+        self.region = .hongkong
     }
     
     // 从内地假日数据创建假日
@@ -42,7 +42,7 @@ struct Holiday: Identifiable, Codable {
 
 // 假日区域枚举
 enum HolidayRegion: String, Codable {
-    case hongKong = "香港"
+    case hongkong = "香港"
     case mainland = "内地"
 }
 

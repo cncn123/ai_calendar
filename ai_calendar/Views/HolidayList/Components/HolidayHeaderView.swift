@@ -38,15 +38,15 @@ struct HolidayHeaderView: View {
                 
                 // 香港
                 Button(action: {
-                    viewModel.toggleRegion(.hongKong)
+                    viewModel.toggleRegion(.hongkong)
                 }) {
                     Text("香港")
                         .font(.footnote)
-                        .fontWeight(viewModel.isRegionSelected(.hongKong) ? .bold : .regular)
+                        .fontWeight(viewModel.isRegionSelected(.hongkong) ? .bold : .regular)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(viewModel.isRegionSelected(.hongKong) ? AppColors.hongKongBlue.opacity(0.2) : Color.gray.opacity(0.1))
-                        .foregroundColor(viewModel.isRegionSelected(.hongKong) ? AppColors.hongKongBlue : .primary)
+                        .background(viewModel.isRegionSelected(.hongkong) ? AppColors.hongkongBlue.opacity(0.2) : Color.gray.opacity(0.1))
+                        .foregroundColor(viewModel.isRegionSelected(.hongkong) ? AppColors.hongkongBlue : .primary)
                         .cornerRadius(16)
                 }
                 

@@ -45,13 +45,11 @@ class CalendarViewModel: ObservableObject {
         monthHolidaysCache.removeValue(forKey: cacheKey)
         
         // 强制重新加载
-        holidayService.clearCache(for: .hongKong)
+        holidayService.clearCache(for: .hongkong)
         holidayService.clearCache(for: .mainland)
         
         // 通知UI更新
         objectWillChange.send()
-        
-        print("刷新 \(currentYear)年\(currentMonth)月 的节假日数据，地区: \(selectedRegion?.rawValue ?? "全部")")
     }
     
     // 切换地区显示
@@ -82,7 +80,7 @@ class CalendarViewModel: ObservableObject {
     // 获取特定日期的香港和内地节假日（用于多地区节假日显示）
     func getHolidaysForMultiRegionCard(date: Date) -> (hkHoliday: Holiday?, mlHoliday: Holiday?) {
         let holidays = getAllHolidaysForDate(date)
-        let hkHoliday = holidays.first { $0.region == .hongKong }
+        let hkHoliday = holidays.first { $0.region == .hongkong }
         let mlHoliday = holidays.first { $0.region == .mainland }
         return (hkHoliday, mlHoliday)
     }
@@ -199,7 +197,7 @@ class CalendarViewModel: ObservableObject {
         // 从每组中选择一个节假日（优先选择香港节假日）
         let uniqueHolidays = groupedByDate.compactMap { (_, holidaysForDate) -> Holiday? in
             // 如果有香港节假日，优先显示
-            if let hkHoliday = holidaysForDate.first(where: { $0.region == .hongKong }) {
+            if let hkHoliday = holidaysForDate.first(where: { $0.region == .hongkong }) {
                 return hkHoliday
             }
             // 否则显示内地节假日

@@ -9,9 +9,9 @@ import SwiftUI
 
 // 主题设置管理器
 enum AppTheme: String, CaseIterable {
-    case system = "跟随系统"
-    case light = "浅色"
-    case dark = "深色"
+    case system
+    case light
+    case dark
     
     var colorScheme: ColorScheme? {
         switch self {
@@ -26,6 +26,13 @@ enum AppTheme: String, CaseIterable {
         case .system: return "iphone"
         case .light: return "sun.max.fill"
         case .dark: return "moon.fill"
+        }
+    }
+    var localizationKey: String {
+        switch self {
+        case .system: return "theme_system"
+        case .light: return "theme_light"
+        case .dark: return "theme_dark"
         }
     }
 }
@@ -60,14 +67,39 @@ class ThemeManager: ObservableObject {
     }
 }
 
+enum AppLanguage: String, CaseIterable {
+    case system
+    case simplified
+    case traditional
+    case english
+
+    var localeIdentifier: String? {
+        switch self {
+        case .system: return nil
+        case .simplified: return "zh-Hans"
+        case .traditional: return "zh-Hant"
+        case .english: return "en"
+        }
+    }
+    var localizationKey: String {
+        switch self {
+        case .system: return "system"
+        case .simplified: return "simplified"
+        case .traditional: return "traditional"
+        case .english: return "english"
+        }
+    }
+}
+
 struct SettingsView: View {
     @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.colorScheme) private var systemColorScheme
+    @ObservedObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         NavigationView {
             List {
-                Section(header: Text("外观设置")) {
+                Section(header: Text(NSLocalizedString("appearance", comment: "外观设置"))) {
                     ForEach(AppTheme.allCases, id: \.self) { theme in
                         Button(action: {
                             withAnimation {
@@ -78,7 +110,7 @@ struct SettingsView: View {
                                 Image(systemName: theme.icon)
                                     .foregroundColor(.accentColor)
                                     .frame(width: 30)
-                                Text(theme.rawValue)
+                                Text(NSLocalizedString(theme.localizationKey, comment: "主题选项"))
                                 Spacer()
                                 if themeManager.currentTheme == theme {
                                     Image(systemName: "checkmark")
@@ -90,16 +122,36 @@ struct SettingsView: View {
                     }
                 }
                 
-                Section(header: Text("关于")) {
+                Section(header: Text(NSLocalizedString("language", comment: "语言"))) {
+                    ForEach(AppLanguage.allCases, id: \.self) { lang in
+                        Button(action: {
+                            languageManager.currentLanguage = lang.localeIdentifier ?? "system"
+                        }) {
+                            HStack {
+                                Text(NSLocalizedString(lang.localizationKey, comment: "语言选项"))
+                                Spacer()
+                                if languageManager.currentLanguage == (lang.localeIdentifier ?? "system") {
+                                    Image(systemName: "checkmark").foregroundColor(.accentColor)
+                                }
+                            }
+                        }
+                        .foregroundColor(.primary)
+                    }
+                    Text(NSLocalizedString("language_restart_tip", comment: "切换语言后需重启App生效"))
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                }
+                
+                Section(header: Text(NSLocalizedString("about", comment: "关于"))) {
                     HStack {
-                        Text("版本")
+                        Text(NSLocalizedString("version", comment: "版本"))
                         Spacer()
                         Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
                             .foregroundColor(.secondary)
                     }
                 }
             }
-            .navigationTitle("设置")
+            .navigationTitle(NSLocalizedString("settings", comment: "设置"))
             .preferredColorScheme(themeManager.colorScheme)
         }
     }

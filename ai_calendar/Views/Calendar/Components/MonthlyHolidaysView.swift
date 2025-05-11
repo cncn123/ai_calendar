@@ -30,42 +30,42 @@ struct MonthlyHolidaysView: View {
                         if regionCounts.hkCount > 0 {
                             HStack(spacing: 4) {
                                 Text("香港：\(regionCounts.hkCount)")
-                                    .font(.caption)
+                                    .font(.subheadline)
                                     .foregroundColor(.white)
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
-                                    .background(AppColors.hongKongBlue)
-                                    .clipShape(Capsule())
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
+                                    .background(AppColors.hongkongBlue)
+                                    .cornerRadius(4)
                             }
                         }
 
                         if regionCounts.mainlandCount > 0 {
                             HStack(spacing: 4) {
                                 Text("内地：\(regionCounts.mainlandCount)")
-                                    .font(.caption)
+                                    .font(.subheadline)
                                     .foregroundColor(.white)
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
                                     .background(AppColors.mainlandRed)
-                                    .clipShape(Capsule())
+                                    .cornerRadius(4)
                             }
                         }
                         
                         if regionCounts.multiRegionDates > 0 && viewModel.selectedRegion == nil {
                             HStack(spacing: 4) {
                                 Text("共同：\(regionCounts.multiRegionDates)")
-                        .font(.caption)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3)
                                     .background(
                                         LinearGradient(
-                                            gradient: Gradient(colors: [AppColors.hongKongBlue, AppColors.mainlandRed]),
+                                            gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                             startPoint: .leading,
                                             endPoint: .trailing
                                         )
                                     )
-                        .clipShape(Capsule())
+                                    .cornerRadius(4)
                             }
                         }
                     }
@@ -87,9 +87,7 @@ struct MonthlyHolidaysView: View {
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVStack(spacing: 12) {
                             // 打印调试信息
-                            let _ = print(
-                                "当前显示节假日: \(monthHolidays.map { "\($0.name)(\($0.region.rawValue))" }.joined(separator: ", "))"
-                            )
+                            // let _ = print(
 
                             ForEach(monthHolidays) { holiday in
                                 // 如果选择了特定地区，直接显示对应节假日
@@ -185,7 +183,7 @@ struct MonthlyHolidaysView: View {
 
     // 计算不同地区节假日数量
     private func calculateRegionCounts(holidays: [Holiday]) -> (hkCount: Int, mainlandCount: Int, multiRegionDates: Int) {
-        let hkHolidays = holidays.filter { $0.region == .hongKong }
+        let hkHolidays = holidays.filter { $0.region == .hongkong }
         let mainlandHolidays = holidays.filter { $0.region == .mainland }
         
         // 计算多地区节假日的日期数量

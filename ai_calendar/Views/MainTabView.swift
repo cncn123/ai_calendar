@@ -15,19 +15,19 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             CalendarView()
                 .tabItem {
-                    Label("日历", systemImage: "calendar")
+                    Label(NSLocalizedString("calendar", comment: "日历"), systemImage: "calendar")
                 }
                 .tag(0)
             
             HolidayListView()
                 .tabItem {
-                    Label("列表", systemImage: "list.bullet")
+                    Label(NSLocalizedString("list", comment: "列表"), systemImage: "list.bullet")
                 }
                 .tag(1)
             
             SettingsView()
                 .tabItem {
-                    Label("设置", systemImage: "gear")
+                    Label(NSLocalizedString("settings", comment: "设置"), systemImage: "gear")
                 }
                 .tag(2)
         }.preferredColorScheme(themeManager.colorScheme)
