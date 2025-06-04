@@ -33,7 +33,7 @@ struct MultiRegionHolidayCard: View {
         .cornerRadius(8)
         .overlay(selectionOverlay)
         .background(selectionBackground)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -41,12 +41,13 @@ struct MultiRegionHolidayCard: View {
     // 左侧日期方块视图 - 使用渐变背景
     private var dateBlock: some View {
         VStack(spacing: 0) {
-            Text("\(hkHoliday.startDate.dayOfMonth)")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(.white)
             Text("\(hkHoliday.startDate.month)月")
                 .font(.system(size: 14))
                 .foregroundColor(.white)
+            Text("\(hkHoliday.startDate.dayOfMonth)")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(.white)
+            
         }
         .frame(width: 70, height: 70)
         .background(
@@ -56,6 +57,7 @@ struct MultiRegionHolidayCard: View {
                 endPoint: .bottom
             )
         )
+        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
         .cornerRadius(8, corners: [.topLeft, .bottomLeft])
     }
     
@@ -127,7 +129,7 @@ struct MultiRegionHolidayCard: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
+        .background(Color(.secondarySystemBackground).opacity(0.6))
         .cornerRadius(8, corners: [.topRight, .bottomRight])
     }
     

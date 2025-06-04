@@ -12,10 +12,9 @@ struct MonthlyHolidaysView: View {
     @ObservedObject var viewModel: CalendarViewModel
     
     var body: some View {
+        // 统一外层样式
         VStack(alignment: .leading, spacing: 10) {
             let monthHolidays = viewModel.getCurrentMonthHolidays()
-            
-            // 计算分地区节假日数量
             let regionCounts = calculateRegionCounts(
                 holidays: viewModel.getHolidaysForMonth(
                     month: viewModel.currentMonth, year: viewModel.currentYear))
@@ -25,7 +24,6 @@ struct MonthlyHolidaysView: View {
                 Text("当月节假日")
                     .font(.title2)
                     .fontWeight(.bold)
-                    // 地区节假日数量显示
                     HStack(spacing: 12) {
                         if regionCounts.hkCount > 0 {
                             HStack(spacing: 4) {
@@ -38,7 +36,6 @@ struct MonthlyHolidaysView: View {
                                     .cornerRadius(4)
                             }
                         }
-
                         if regionCounts.mainlandCount > 0 {
                             HStack(spacing: 4) {
                                 Text("内地：\(regionCounts.mainlandCount)")
@@ -50,7 +47,6 @@ struct MonthlyHolidaysView: View {
                                     .cornerRadius(4)
                             }
                         }
-                        
                         if regionCounts.multiRegionDates > 0 && viewModel.selectedRegion == nil {
                             HStack(spacing: 4) {
                                 Text("共同：\(regionCounts.multiRegionDates)")
@@ -74,23 +70,23 @@ struct MonthlyHolidaysView: View {
                 .accessibilityLabel(
                     "当月节假日列表，共\(monthHolidays.count)个，其中香港\(regionCounts.hkCount)个，内地\(regionCounts.mainlandCount)个"
                 )
-
             }
-            
+            // 统一内容区域样式
+            ZStack {
             if monthHolidays.isEmpty {
+                    VStack {
+                        Spacer(minLength: 24)
                 Text("本月暂无节假日")
                     .foregroundColor(.secondary)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        Spacer(minLength: 24)
+                    }
+                    .frame(minHeight: 120) // 保证空时区域不塌陷
             } else {
                 ScrollViewReader { proxy in
                     ScrollView(.vertical, showsIndicators: true) {
                         LazyVStack(spacing: 12) {
-                            // 打印调试信息
-                            // let _ = print(
-
                             ForEach(monthHolidays) { holiday in
-                                // 如果选择了特定地区，直接显示对应节假日
                                 if viewModel.selectedRegion != nil {
                                 HolidayInfoCard(
                                     holiday: holiday,
@@ -98,22 +94,16 @@ struct MonthlyHolidaysView: View {
                                             holiday.startDate, viewModel.selectedDate)
                                 )
                                     .frame(maxWidth: .infinity)
-                                    .id("\(holiday.id)")  // 使用节假日唯一ID作为视图ID
+                                        .id("\(holiday.id)")
                                     .onTapGesture {
-                                        // 点击节假日卡片时更新选中日期
                                         withAnimation {
                                             viewModel.selectedDate = holiday.startDate
                                         }
                                     }
                                 } else {
-                                    // 在"全部"状态下，检查是否为多地区节假日
                                     if viewModel.hasMultiRegionHolidays(holiday.startDate) {
-                                        // 获取多地区节假日数据
                                         let multiHolidays = viewModel.getHolidaysForMultiRegionCard(date: holiday.startDate)
-                                        
-                                        // 确保两个地区的节假日都存在
                                         if let hkHoliday = multiHolidays.hkHoliday, let mlHoliday = multiHolidays.mlHoliday {
-                                            // 显示合并的多地区节假日卡片
                                             MultiRegionHolidayCard(
                                                 hkHoliday: hkHoliday,
                                                 mlHoliday: mlHoliday,
@@ -128,7 +118,6 @@ struct MonthlyHolidaysView: View {
                                                 }
                                             }
                                         } else {
-                                            // 降级处理：如果意外缺少某个地区的节假日数据
                                             HolidayInfoCard(
                                                 holiday: holiday,
                                                 isSelected: viewModel.isSameDay(
@@ -143,7 +132,6 @@ struct MonthlyHolidaysView: View {
                                             }
                                         }
                                     } else {
-                                        // 普通单一地区节假日卡片
                                         HolidayInfoCard(
                                             holiday: holiday,
                                             isSelected: viewModel.isSameDay(
@@ -163,22 +151,23 @@ struct MonthlyHolidaysView: View {
                         .padding(.horizontal)
                     }
                     .onChange(of: viewModel.selectedDate) { oldDate, newDate in
-                        // 当选中日期变化时，检查是否有对应的节假日
                         if let holiday = viewModel.getHoliday(for: newDate) {
-                            // 延迟一帧以确保布局已完成
                             DispatchQueue.main.async {
-                                // 使用动画效果滚动到对应的节假日卡片
                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                    // 滚动到对应的节假日卡片，使用center锚点确保完整显示
                                     proxy.scrollTo(holiday.id, anchor: .center)
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+            .background(Color(.systemGray6).opacity(0.8))
+            .cornerRadius(12)
+            .padding(.horizontal)
         }
-        .padding(.vertical)
     }
 
     // 计算不同地区节假日数量

@@ -33,7 +33,7 @@ struct HolidayInfoCard: View {
         .cornerRadius(8)
         .overlay(selectionOverlay)
         .background(selectionBackground)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -41,11 +41,11 @@ struct HolidayInfoCard: View {
     // 左侧日期方块视图
     private var dateBlock: some View {
         VStack(spacing: 0) {
-            Text("\(holiday.startDate.dayOfMonth)")
-                .font(.system(size: 24, weight: .bold))
-                .foregroundColor(.white)
             Text("\(holiday.startDate.month)月")
                 .font(.system(size: 14))
+                .foregroundColor(.white)
+            Text("\(holiday.startDate.dayOfMonth)")
+                .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.white)
         }
         .frame(width: 70, height: 70)
@@ -96,7 +96,7 @@ struct HolidayInfoCard: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
+        .background(Color(.secondarySystemBackground).opacity(0.6))
         .cornerRadius(8, corners: [.topRight, .bottomRight])
     }
     

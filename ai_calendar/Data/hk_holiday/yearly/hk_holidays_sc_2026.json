@@ -1,0 +1,318 @@
+{
+		"vcalendar": [{
+			"prodid": "-//1823 Contact Centre, HKSARG//Hong Kong Public Holidays//EN",
+			"version": "2.0",
+			"calscale": "GREGORIAN",
+			"x-wr-timezone": "Asia/Hong_Kong",
+			"x-wr-calname": "香港公众假期",
+			"x-wr-caldesc": "香港公众假期",
+			"vevent": [
+			{
+			"dtstart": [
+				"20260101",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260102",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260101@1823.gov.hk",
+			"summary": "一月一日"
+			},
+			{
+			"dtstart": [
+				"20260217",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260218",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260217@1823.gov.hk",
+			"summary": "农历年初一"
+			},
+			{
+			"dtstart": [
+				"20260218",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260219",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260218@1823.gov.hk",
+			"summary": "农历年初二"
+			},
+			{
+			"dtstart": [
+				"20260219",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260220",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260219@1823.gov.hk",
+			"summary": "农历年初三"
+			},
+			{
+			"dtstart": [
+				"20260403",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260404",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260403@1823.gov.hk",
+			"summary": "耶稣受难节"
+			},
+			{
+			"dtstart": [
+				"20260404",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260405",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260404@1823.gov.hk",
+			"summary": "耶稣受难节翌日"
+			},
+			{
+			"dtstart": [
+				"20260406",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260407",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260406@1823.gov.hk",
+			"summary": "清明节翌日"
+			},
+			{
+			"dtstart": [
+				"20260407",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260408",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260407@1823.gov.hk",
+			"summary": "复活节星期一翌日"
+			},
+			{
+			"dtstart": [
+				"20260501",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260502",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260501@1823.gov.hk",
+			"summary": "劳动节"
+			},
+			{
+			"dtstart": [
+				"20260525",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260526",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260525@1823.gov.hk",
+			"summary": "佛诞翌日"
+			},
+			{
+			"dtstart": [
+				"20260619",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260620",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260619@1823.gov.hk",
+			"summary": "端午节"
+			},
+			{
+			"dtstart": [
+				"20260701",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260702",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260701@1823.gov.hk",
+			"summary": "香港特别行政区成立纪念日"
+			},
+			{
+			"dtstart": [
+				"20260926",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20260927",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20260926@1823.gov.hk",
+			"summary": "中秋节翌日"
+			},
+			{
+			"dtstart": [
+				"20261001",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20261002",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20261001@1823.gov.hk",
+			"summary": "国庆日"
+			},
+			{
+			"dtstart": [
+				"20261019",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20261020",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20261019@1823.gov.hk",
+			"summary": "重阳节翌日"
+			},
+			{
+			"dtstart": [
+				"20261225",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20261226",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20261225@1823.gov.hk",
+			"summary": "圣诞节"
+			},
+			{
+			"dtstart": [
+				"20261226",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtend": [
+				"20261227",
+				{
+					"value": "DATE"
+				}
+			],
+			"dtstamp": "20250516T064300Z",
+			"transp": "TRANSPARENT",
+			"uid": "20261226@1823.gov.hk",
+			"summary": "圣诞节后第一个周日"
+			}
+		]
+	}]
+}
