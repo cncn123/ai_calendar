@@ -29,11 +29,15 @@ struct MultiRegionHolidayCard: View {
             // 右侧信息区域
             infoBlock.frame(height: 70)
         }
-        .frame(height: 70)  // 稍微增加高度以适应多行内容
-        .cornerRadius(8)
+        .frame(height: 70)
+        .cornerRadius(16)
         .overlay(selectionOverlay)
-        .background(selectionBackground)
-        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.ultraThinMaterial)
+                .opacity(0.6)
+        )
+        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 3)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -47,18 +51,19 @@ struct MultiRegionHolidayCard: View {
             Text("\(hkHoliday.startDate.dayOfMonth)")
                 .font(.system(size: 24, weight: .bold))
                 .foregroundColor(.white)
-            
         }
         .frame(width: 70, height: 70)
         .background(
             LinearGradient(
-                gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
+                gradient: Gradient(colors: [
+                    AppColors.hongkongBlue.opacity(0.85),
+                    AppColors.mainlandRed.opacity(0.85)
+                ]),
                 startPoint: .top,
                 endPoint: .bottom
             )
         )
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
-        .cornerRadius(8, corners: [.topLeft, .bottomLeft])
+        .cornerRadius(16, corners: [.topLeft, .bottomLeft])
     }
     
     // 右侧信息区域视图
@@ -78,9 +83,9 @@ struct MultiRegionHolidayCard: View {
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
-                        .background(AppColors.hongkongBlue.opacity(0.2))
+                        .background(AppColors.hongkongBlue.opacity(0.12))
                         .foregroundColor(AppColors.hongkongBlue)
-                        .cornerRadius(4)
+                        .cornerRadius(8)
                 }
                 
                 Spacer(minLength: 8)
@@ -97,9 +102,9 @@ struct MultiRegionHolidayCard: View {
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
-                        .background(AppColors.mainlandRed.opacity(0.2))
+                        .background(AppColors.mainlandRed.opacity(0.12))
                         .foregroundColor(AppColors.mainlandRed)
-                        .cornerRadius(4)
+                        .cornerRadius(8)
                 }
             }
             
@@ -129,8 +134,9 @@ struct MultiRegionHolidayCard: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground).opacity(0.6))
-        .cornerRadius(8, corners: [.topRight, .bottomRight])
+        .background(.ultraThinMaterial)
+        .opacity(0.7)
+        .cornerRadius(16, corners: [.topRight, .bottomRight])
     }
     
     // 选中状态边框 - 使用渐变虚线
@@ -138,12 +144,15 @@ struct MultiRegionHolidayCard: View {
         ZStack {
             if isSelected {
                 LinearGradient(
-                    gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
+                    gradient: Gradient(colors: [
+                        AppColors.hongkongBlue.opacity(0.7),
+                        AppColors.mainlandRed.opacity(0.7)
+                    ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
                 .mask(
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 16)
                         .strokeBorder(
                             style: StrokeStyle(
                                 lineWidth: 1.5,
@@ -152,16 +161,10 @@ struct MultiRegionHolidayCard: View {
                         )
                 )
             } else {
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 16)
                     .strokeBorder(Color.clear, lineWidth: 0)
             }
         }
-    }
-    
-    // 选中状态背景 - 保持透明
-    private var selectionBackground: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .fill(Color.clear)
     }
     
     // 创建无障碍标签

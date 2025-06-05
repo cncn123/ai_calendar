@@ -46,5 +46,10 @@ struct CalendarGridView: View {
             .frame(height: 300)
         }
         .id("\(viewModel.currentYear)-\(viewModel.currentMonth)") // 保证月份改变时重新渲染
+        .padding(.vertical)
+        .frame(maxWidth: .infinity)
+        .background(Color(.systemGray6).opacity(0.8))
+        .cornerRadius(12)
+        .padding(.horizontal)
     }
 }

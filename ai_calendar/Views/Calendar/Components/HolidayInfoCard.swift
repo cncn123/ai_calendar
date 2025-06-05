@@ -30,10 +30,14 @@ struct HolidayInfoCard: View {
                 .frame(height: 70)
         }
         .frame(height: 70)
-        .cornerRadius(8)
+        .cornerRadius(16)
         .overlay(selectionOverlay)
-        .background(selectionBackground)
-        .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.ultraThinMaterial)
+                .opacity(0.6)
+        )
+        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 3)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -49,8 +53,11 @@ struct HolidayInfoCard: View {
                 .foregroundColor(.white)
         }
         .frame(width: 70, height: 70)
-        .background(getHolidayColor())
-        .cornerRadius(8, corners: [.topLeft, .bottomLeft])
+        .background(
+            getHolidayColor()
+                .opacity(0.85)
+        )
+        .cornerRadius(16, corners: [.topLeft, .bottomLeft])
     }
     
     // 右侧信息区域视图
@@ -66,9 +73,9 @@ struct HolidayInfoCard: View {
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
-                    .background(getHolidayColor().opacity(0.2))
+                    .background(getHolidayColor().opacity(0.12))
                     .foregroundColor(getHolidayColor())
-                    .cornerRadius(4)
+                    .cornerRadius(8)
             }
             
             HStack {
@@ -96,13 +103,13 @@ struct HolidayInfoCard: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground).opacity(0.6))
-        .cornerRadius(8, corners: [.topRight, .bottomRight])
+        .background(.ultraThinMaterial)
+        .cornerRadius(16, corners: [.topRight, .bottomRight])
     }
     
     // 选中状态边框
     private var selectionOverlay: some View {
-        RoundedRectangle(cornerRadius: 8)
+        RoundedRectangle(cornerRadius: 16)
             .strokeBorder(
                 style: StrokeStyle(
                     lineWidth: 1.5,
@@ -110,12 +117,6 @@ struct HolidayInfoCard: View {
                 )
             )
             .foregroundColor(isSelected ? getHolidayColor() : Color.clear)
-    }
-    
-    // 选中状态背景 - 移除背景颜色，保持透明
-    private var selectionBackground: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .fill(Color.clear)
     }
     
     // 创建无障碍标签
