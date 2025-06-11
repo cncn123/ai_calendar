@@ -17,15 +17,11 @@ struct CalendarView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            VStack(spacing: 8) {
                 // 顶部栏 - 包含标题和地区选择器
                 CalendarHeaderView(viewModel: viewModel)
-                    .padding(.top, 8)  // 增加顶部间距
                 
-                // 月份选择器
-                MonthSelectorView(viewModel: viewModel)
-                
-                // 日历内容
+                // 日历内容（包含月份选择器和网格）
                 CalendarGridView(viewModel: viewModel)
                 
                 // 当月所有节假日卡片

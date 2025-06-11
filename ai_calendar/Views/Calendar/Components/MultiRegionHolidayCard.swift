@@ -135,7 +135,6 @@ struct MultiRegionHolidayCard: View {
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
         .background(.ultraThinMaterial)
-        .opacity(0.7)
         .cornerRadius(16, corners: [.topRight, .bottomRight])
     }
     
