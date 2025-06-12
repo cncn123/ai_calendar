@@ -30,14 +30,31 @@ struct HolidayInfoCard: View {
                 .frame(height: 70)
         }
         .frame(height: 70)
-        .cornerRadius(16)
+        .cornerRadius(20)
         .overlay(selectionOverlay)
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            ZStack {
+                // 玻璃质感背景
+                RoundedRectangle(cornerRadius: 20)
                 .fill(.ultraThinMaterial)
-                .opacity(0.6)
+                    .opacity(0.8)
+                
+                // 渐变边框
+                RoundedRectangle(cornerRadius: 20)
+                    .strokeBorder(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                getHolidayColor().opacity(0.3),
+                                getHolidayColor().opacity(0.1)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            }
         )
-        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 3)
+        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -54,10 +71,16 @@ struct HolidayInfoCard: View {
         }
         .frame(width: 70, height: 70)
         .background(
-            getHolidayColor()
-                .opacity(0.85)
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    getHolidayColor().opacity(0.9),
+                    getHolidayColor().opacity(0.7)
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
         )
-        .cornerRadius(16, corners: [.topLeft, .bottomLeft])
+        .cornerRadius(20, corners: [.topLeft, .bottomLeft])
     }
     
     // 右侧信息区域视图
@@ -73,7 +96,16 @@ struct HolidayInfoCard: View {
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
-                    .background(getHolidayColor().opacity(0.12))
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                getHolidayColor().opacity(0.15),
+                                getHolidayColor().opacity(0.05)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                     .foregroundColor(getHolidayColor())
                     .cornerRadius(8)
             }
@@ -104,12 +136,12 @@ struct HolidayInfoCard: View {
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
         .background(.ultraThinMaterial)
-        .cornerRadius(16, corners: [.topRight, .bottomRight])
+        .cornerRadius(20, corners: [.topRight, .bottomRight])
     }
     
     // 选中状态边框
     private var selectionOverlay: some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: 20)
             .strokeBorder(
                 style: StrokeStyle(
                     lineWidth: 1.5,

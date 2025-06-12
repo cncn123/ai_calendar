@@ -30,14 +30,31 @@ struct MultiRegionHolidayCard: View {
             infoBlock.frame(height: 70)
         }
         .frame(height: 70)
-        .cornerRadius(16)
+        .cornerRadius(20)
         .overlay(selectionOverlay)
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            ZStack {
+                // 玻璃质感背景
+                RoundedRectangle(cornerRadius: 20)
                 .fill(.ultraThinMaterial)
-                .opacity(0.6)
+                    .opacity(0.8)
+                
+                // 渐变边框
+                RoundedRectangle(cornerRadius: 20)
+                    .strokeBorder(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                AppColors.hongkongBlue.opacity(0.3),
+                                AppColors.mainlandRed.opacity(0.3)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            }
         )
-        .shadow(color: Color.black.opacity(0.08), radius: 6, x: 0, y: 3)
+        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
     }
@@ -56,60 +73,64 @@ struct MultiRegionHolidayCard: View {
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
-                    AppColors.hongkongBlue.opacity(0.85),
-                    AppColors.mainlandRed.opacity(0.85)
+                    AppColors.hongkongBlue.opacity(0.9),
+                    AppColors.mainlandRed.opacity(0.9)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
             )
         )
-        .cornerRadius(16, corners: [.topLeft, .bottomLeft])
+        .cornerRadius(20, corners: [.topLeft, .bottomLeft])
     }
     
     // 右侧信息区域视图
     private var infoBlock: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // 节假日名称区域 - 香港和内地节假日并排显示
-            HStack(spacing: 6) {
-                // 香港节假日信息
-                HStack(spacing: 4) {
+            HStack {
                     Text(hkHoliday.name)
                         .font(.headline)
                         .foregroundColor(.primary)
-                        .lineLimit(1)
                     
-                    // 香港标签
-                    Text(hkHoliday.region.rawValue)
+                // 显示地区标签
+                HStack(spacing: 4) {
+                    Text("香港")
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
-                        .background(AppColors.hongkongBlue.opacity(0.12))
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    AppColors.hongkongBlue.opacity(0.15),
+                                    AppColors.hongkongBlue.opacity(0.05)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
                         .foregroundColor(AppColors.hongkongBlue)
                         .cornerRadius(8)
-                }
-                
-                Spacer(minLength: 8)
-                
-                // 内地节假日信息
-                HStack(spacing: 4) {
-                    Text(mlHoliday.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .lineLimit(1)
                     
-                    // 内地标签
-                    Text(mlHoliday.region.rawValue)
+                    Text("内地")
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
-                        .background(AppColors.mainlandRed.opacity(0.12))
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    AppColors.mainlandRed.opacity(0.15),
+                                    AppColors.mainlandRed.opacity(0.05)
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
                         .foregroundColor(AppColors.mainlandRed)
                         .cornerRadius(8)
                 }
             }
             
             HStack {
-                // 显示日期信息
+                // 显示开始日期
                 Text(formatDate(hkHoliday.startDate))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -125,7 +146,6 @@ struct MultiRegionHolidayCard: View {
                 
                 Spacer()
             
-                // 显示星期几
                 Text(getWeekday(from: hkHoliday.startDate))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -135,35 +155,19 @@ struct MultiRegionHolidayCard: View {
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
         .background(.ultraThinMaterial)
-        .cornerRadius(16, corners: [.topRight, .bottomRight])
+        .cornerRadius(20, corners: [.topRight, .bottomRight])
     }
     
-    // 选中状态边框 - 使用渐变虚线
+    // 选中状态边框
     private var selectionOverlay: some View {
-        ZStack {
-            if isSelected {
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        AppColors.hongkongBlue.opacity(0.7),
-                        AppColors.mainlandRed.opacity(0.7)
-                    ]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .mask(
-                    RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: 20)
                         .strokeBorder(
                             style: StrokeStyle(
                                 lineWidth: 1.5,
                                 dash: [5, 3]
                             )
                         )
-                )
-            } else {
-                RoundedRectangle(cornerRadius: 16)
-                    .strokeBorder(Color.clear, lineWidth: 0)
-            }
-        }
+            .foregroundColor(isSelected ? AppColors.hongkongBlue : Color.clear)
     }
     
     // 创建无障碍标签

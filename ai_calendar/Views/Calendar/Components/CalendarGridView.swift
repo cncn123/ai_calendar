@@ -34,17 +34,17 @@ struct CalendarGridView: View {
                 }
                 .padding(.horizontal)
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, 12)
             
             // 合并星期标题和日期网格
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 8) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 12) {
                 // 星期标题行
                 ForEach(viewModel.weekDays, id: \.self) { day in
                     Text(day)
                         .font(.headline)
                         .foregroundColor(.primary)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
+                        .padding(.vertical, 8)
                 }
                 
                 // 日期网格
@@ -64,14 +64,35 @@ struct CalendarGridView: View {
                 }
             }
             .padding(.horizontal)
-            .padding(.vertical, 8)
-            .frame(height: 280)
+            .padding(.vertical, 12)
+            .frame(height: 320)
         }
         .id("\(viewModel.currentYear)-\(viewModel.currentMonth)") // 保证月份改变时重新渲染
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
         .frame(maxWidth: .infinity)
-        .background(Color(.systemGray6).opacity(0.8))
-        .cornerRadius(12)
+        .background(
+            ZStack {
+                // 玻璃质感背景
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(.ultraThinMaterial)
+                    .opacity(0.8)
+                
+                // 渐变边框
+                RoundedRectangle(cornerRadius: 24)
+                    .strokeBorder(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.blue.opacity(0.3),
+                                Color.purple.opacity(0.3)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            }
+        )
+        .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
         .padding(.horizontal)
     }
 }
