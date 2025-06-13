@@ -1,10 +1,3 @@
-//
-//  MonthlyHolidaysView.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 
 // MARK: - 当月节假日列表视图
@@ -164,7 +157,29 @@ struct MonthlyHolidaysView: View {
             }
             .padding(.vertical)
             .frame(maxWidth: .infinity)
-            .background(Color(.systemGray6).opacity(0.8))
+            .background(
+                ZStack {
+                    // 玻璃质感背景
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(.ultraThinMaterial)
+                        .opacity(0.05)
+                    
+                    // 渐变边框
+                    RoundedRectangle(cornerRadius: 24)
+                        .strokeBorder(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.blue.opacity(0.3),
+                                    Color.purple.opacity(0.3)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                }
+            )
+            .shadow(color: Color.black.opacity(0.05), radius: 10, x: 0, y: 5)
             .cornerRadius(12)
             .padding(.horizontal)
         }
@@ -212,7 +227,6 @@ struct MonthlyHolidaysView_Previews: PreviewProvider {
                 .previewDisplayName("默认状态")
                 .preferredColorScheme(.light)
                 .padding()
-                .background(Color(.systemBackground))
                 .previewLayout(.sizeThatFits)
             
             // 预览2：暗黑模式
@@ -220,7 +234,6 @@ struct MonthlyHolidaysView_Previews: PreviewProvider {
                 .previewDisplayName("暗黑模式")
                 .preferredColorScheme(.dark)
                 .padding()
-                .background(Color(.systemBackground))
                 .previewLayout(.sizeThatFits)
         }
     }

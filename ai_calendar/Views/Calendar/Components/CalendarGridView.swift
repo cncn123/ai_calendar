@@ -1,10 +1,3 @@
-//
-//  CalendarGridView.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 
 // MARK: - 日历网格视图
@@ -63,7 +56,7 @@ struct CalendarGridView: View {
                     }
                 }
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 12)
             .padding(.vertical, 12)
             .frame(height: 320)
         }
@@ -75,7 +68,7 @@ struct CalendarGridView: View {
                 // 玻璃质感背景
                 RoundedRectangle(cornerRadius: 24)
                     .fill(.ultraThinMaterial)
-                    .opacity(0.8)
+                    .opacity(0.05)
                 
                 // 渐变边框
                 RoundedRectangle(cornerRadius: 24)
@@ -109,16 +102,12 @@ struct CalendarGridView_Previews: PreviewProvider {
             CalendarGridView(viewModel: viewModel)
                 .previewDisplayName("默认状态")
                 .preferredColorScheme(.light)
-                .padding()
-                .background(Color(.systemBackground))
                 .previewLayout(.sizeThatFits)
             
             // 预览2：暗黑模式
             CalendarGridView(viewModel: viewModel)
                 .previewDisplayName("暗黑模式")
                 .preferredColorScheme(.dark)
-                .padding()
-                .background(Color(.systemBackground))
                 .previewLayout(.sizeThatFits)
         }
     }

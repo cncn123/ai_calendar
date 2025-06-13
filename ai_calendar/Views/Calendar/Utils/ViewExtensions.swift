@@ -1,10 +1,3 @@
-//
-//  ViewExtensions.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 
 // 扩展View以支持特定角落的圆角

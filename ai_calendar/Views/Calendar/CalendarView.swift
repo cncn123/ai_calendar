@@ -1,10 +1,3 @@
-//
-//  CalendarView.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 import Foundation
 
@@ -21,33 +14,26 @@ struct CalendarView: View {
                 VStack(spacing: 16) {
                 // 顶部栏 - 包含标题和地区选择器
                 CalendarHeaderView(viewModel: viewModel)
-                        .padding(.horizontal)
                 
                 // 日历内容（包含月份选择器和网格）
                 CalendarGridView(viewModel: viewModel)
-                        .padding(.horizontal)
                 
                 // 当月所有节假日卡片
                 MonthlyHolidaysView(viewModel: viewModel)
                     .id("holidaysView")
-                        .padding(.horizontal)
                 }
                 .padding(.vertical)
             }
             .background(
-                ZStack {
-                    Color(.systemBackground)
-                    
-                    // 添加渐变背景
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color.blue.opacity(0.05),
-                            Color.purple.opacity(0.05)
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-            }
+                // 添加渐变背景
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.blue.opacity(0.05),
+                        Color.purple.opacity(0.05)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
             )
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)

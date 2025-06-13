@@ -1,10 +1,3 @@
-//
-//  DayCell.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 
 // MARK: - 日期单元格视图

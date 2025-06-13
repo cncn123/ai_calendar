@@ -1,10 +1,3 @@
-//
-//  CalendarViewModel.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 import Foundation
 

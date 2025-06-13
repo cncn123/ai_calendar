@@ -1,10 +1,3 @@
-//
-//  MultiRegionHolidayCard.swift
-//  ai_calendar
-//
-//  Created by Trae AI on 2023
-//
-
 import SwiftUI
 
 // MARK: - 多地区节假日卡片
@@ -30,30 +23,8 @@ struct MultiRegionHolidayCard: View {
             infoBlock.frame(height: 70)
         }
         .frame(height: 70)
-        .cornerRadius(20)
+        .cornerRadius(24)
         .overlay(selectionOverlay)
-        .background(
-            ZStack {
-                // 玻璃质感背景
-                RoundedRectangle(cornerRadius: 20)
-                .fill(.ultraThinMaterial)
-                    .opacity(0.8)
-                
-                // 渐变边框
-                RoundedRectangle(cornerRadius: 20)
-                    .strokeBorder(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                AppColors.hongkongBlue.opacity(0.3),
-                                AppColors.mainlandRed.opacity(0.3)
-                            ]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        lineWidth: 1
-                    )
-            }
-        )
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(createAccessibilityLabel())
@@ -80,7 +51,7 @@ struct MultiRegionHolidayCard: View {
                 endPoint: .bottom
             )
         )
-        .cornerRadius(20, corners: [.topLeft, .bottomLeft])
+        .cornerRadius(24, corners: [.topLeft, .bottomLeft])
     }
     
     // 右侧信息区域视图
@@ -155,12 +126,13 @@ struct MultiRegionHolidayCard: View {
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity)
         .background(.ultraThinMaterial)
-        .cornerRadius(20, corners: [.topRight, .bottomRight])
+        .opacity(0.8)
+        .cornerRadius(24, corners: [.topRight, .bottomRight])
     }
     
     // 选中状态边框
     private var selectionOverlay: some View {
-        RoundedRectangle(cornerRadius: 20)
+        RoundedRectangle(cornerRadius: 24)
                         .strokeBorder(
                             style: StrokeStyle(
                                 lineWidth: 1.5,
@@ -195,4 +167,4 @@ struct MultiRegionHolidayCard: View {
         formatter.dateFormat = "M月d日"
         return formatter.string(from: date)
     }
-} 
+}
