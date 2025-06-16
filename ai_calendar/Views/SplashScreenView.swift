@@ -46,7 +46,7 @@ struct SplashScreenView: View {
                 .frame(height: 160)
                 
                 // 应用名称
-                Text("节假日日历")
+                Text("中港假日通")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

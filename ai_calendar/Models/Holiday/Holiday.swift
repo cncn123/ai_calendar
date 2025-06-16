@@ -14,6 +14,15 @@ struct Holiday: Identifiable, Codable {
     var endDate: Date // 结束日期
     var region: HolidayRegion // 地区信息
     
+    // 基本初始化方法
+    init(id: String, name: String, startDate: Date, endDate: Date, region: HolidayRegion) {
+        self.id = id
+        self.name = name
+        self.startDate = startDate
+        self.endDate = endDate
+        self.region = region
+    }
+    
     // 从 vevent 数据创建香港假日
     init(from vevent: VEvent) {
         self.id = vevent.uid

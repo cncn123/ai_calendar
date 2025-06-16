@@ -100,6 +100,5 @@ struct CalendarHeaderView: View {
         .padding()
         .background(Color(.systemBackground))
     }
-    .previewLayout(.sizeThatFits)
 }
 

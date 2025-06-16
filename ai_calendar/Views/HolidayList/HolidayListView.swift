@@ -55,8 +55,8 @@ struct HolidayListView: View {
         .onAppear {
             viewModel.loadHolidays(for: selectedYear)
         }
-        .onChange(of: selectedYear) { newYear in
-            viewModel.loadHolidays(for: newYear)
+        .onChange(of: selectedYear) { oldValue, newValue in
+            viewModel.loadHolidays(for: newValue)
         }
     }
     

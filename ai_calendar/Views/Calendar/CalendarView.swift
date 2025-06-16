@@ -28,8 +28,8 @@ struct CalendarView: View {
                 // 添加渐变背景
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Color.blue.opacity(0.05),
-                        Color.purple.opacity(0.05)
+                        Color.blue.opacity(colorScheme == .dark ? 0.15 : 0.05),
+                        Color.purple.opacity(colorScheme == .dark ? 0.15 : 0.05)
                     ]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -80,7 +80,7 @@ struct CalendarView: View {
         }
         
         // 检查今天是否有节假日
-        if let todayHoliday = viewModel.getHoliday(for: today) {
+        if viewModel.getHoliday(for: today) != nil {
             // 将选中日期设置为今天，这会触发 MonthlyHolidaysView 中的滚动
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 withAnimation {

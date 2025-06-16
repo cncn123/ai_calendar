@@ -67,34 +67,9 @@ class ThemeManager: ObservableObject {
     }
 }
 
-enum AppLanguage: String, CaseIterable {
-    case system
-    case simplified
-    case traditional
-    case english
-
-    var localeIdentifier: String? {
-        switch self {
-        case .system: return nil
-        case .simplified: return "zh-Hans"
-        case .traditional: return "zh-Hant"
-        case .english: return "en"
-        }
-    }
-    var localizationKey: String {
-        switch self {
-        case .system: return "system"
-        case .simplified: return "simplified"
-        case .traditional: return "traditional"
-        case .english: return "english"
-        }
-    }
-}
-
 struct SettingsView: View {
     @EnvironmentObject private var themeManager: ThemeManager
     @Environment(\.colorScheme) private var systemColorScheme
-    @ObservedObject private var languageManager = LanguageManager.shared
     
     var body: some View {
         NavigationView {
@@ -120,26 +95,6 @@ struct SettingsView: View {
                         }
                         .foregroundColor(.primary)
                     }
-                }
-                
-                Section(header: Text(NSLocalizedString("language", comment: "语言"))) {
-                    ForEach(AppLanguage.allCases, id: \.self) { lang in
-                        Button(action: {
-                            languageManager.currentLanguage = lang.localeIdentifier ?? "system"
-                        }) {
-                            HStack {
-                                Text(NSLocalizedString(lang.localizationKey, comment: "语言选项"))
-                                Spacer()
-                                if languageManager.currentLanguage == (lang.localeIdentifier ?? "system") {
-                                    Image(systemName: "checkmark").foregroundColor(.accentColor)
-                                }
-                            }
-                        }
-                        .foregroundColor(.primary)
-                    }
-                    Text(NSLocalizedString("language_restart_tip", comment: "切换语言后需重启App生效"))
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
                 }
                 
                 Section(header: Text(NSLocalizedString("about", comment: "关于"))) {

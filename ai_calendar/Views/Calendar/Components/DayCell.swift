@@ -46,9 +46,27 @@ struct DayCell: View {
             onTap()
         }) {
             ZStack {
-                // 选中状态显示虚线圆圈
+                // 选中状态显示虚线圆角矩形
                 if isSelected {
-                    Circle()
+                    if isMultiRegionHoliday && viewModel.selectedRegion == nil {
+                        // 多地区节假日使用渐变虚线
+                        RoundedRectangle(cornerRadius: 8)
+                            .strokeBorder(
+                                style: StrokeStyle(
+                                    lineWidth: 1.5,
+                                    dash: [3, 3]
+                                )
+                            )
+                            .foregroundStyle(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                    } else {
+                        // 单一地区节假日使用单色虚线
+                        RoundedRectangle(cornerRadius: 8)
                         .strokeBorder(
                             style: StrokeStyle(
                                 lineWidth: 1.5,
@@ -56,6 +74,7 @@ struct DayCell: View {
                             )
                         )
                         .foregroundColor(getSelectionColor())
+                    }
                 }
                 
                 VStack(spacing: 2) {
