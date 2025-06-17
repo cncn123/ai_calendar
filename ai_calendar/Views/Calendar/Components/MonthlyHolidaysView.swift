@@ -25,8 +25,14 @@ struct MonthlyHolidaysView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 3)
-                                    .background(AppColors.hongkongBlue)
-                                    .cornerRadius(4)
+                                    .background(
+                                        LinearGradient(
+                                        gradient: Gradient(colors: [AppColors.hongkongBlue.opacity(0.9), AppColors.hongkongBlue.opacity(0.7)]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                        )
+                                    .cornerRadius(8)
                             }
                         }
                         if regionCounts.mainlandCount > 0 {
@@ -36,8 +42,14 @@ struct MonthlyHolidaysView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 3)
-                                    .background(AppColors.mainlandRed)
-                                    .cornerRadius(4)
+                                    .background(
+                                        LinearGradient(
+                                        gradient: Gradient(colors: [AppColors.mainlandRed.opacity(0.9), AppColors.mainlandRed.opacity(0.7)]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                        )
+                                    )
+                                    .cornerRadius(8)
                             }
                         }
                         if regionCounts.multiRegionDates > 0 && viewModel.selectedRegion == nil {
@@ -220,20 +232,22 @@ struct MonthlyHolidaysView_Previews: PreviewProvider {
         // 创建模拟的CalendarViewModel
         let viewModel = CalendarViewModel()
         
+        // 设置当前月份为1月
+        viewModel.currentMonth = 1
+        viewModel.currentYear = 2025
+        
         // 设置当前日期为预览日期
         return Group {
             // 预览1：默认状态
             MonthlyHolidaysView(viewModel: viewModel)
                 .previewDisplayName("默认状态")
                 .preferredColorScheme(.light)
-                .padding()
                 .previewLayout(.sizeThatFits)
             
             // 预览2：暗黑模式
             MonthlyHolidaysView(viewModel: viewModel)
                 .previewDisplayName("暗黑模式")
                 .preferredColorScheme(.dark)
-                .padding()
                 .previewLayout(.sizeThatFits)
         }
     }

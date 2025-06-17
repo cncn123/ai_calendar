@@ -63,22 +63,22 @@ struct SplashScreenView: View {
         }
         .onAppear {
             // 执行动画序列
-            withAnimation(.easeOut(duration: 0.8).delay(0.2)) {
+            withAnimation(.easeOut(duration: 0.4).delay(0.1)) {
                 opacity = 1
                 iconScale = 1
             }
             
-            withAnimation(.spring(response: 0.8, dampingFraction: 0.6).delay(0.8)) {
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.6).delay(0.4)) {
                 scale = 1
                 rotation = 0
             }
             
-            withAnimation(.easeIn(duration: 0.4).delay(1.4)) {
+            withAnimation(.easeIn(duration: 0.2).delay(0.7)) {
                 showText = true
             }
             
             // 延迟后切换到主界面
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 withAnimation {
                     self.isActive = true
                 }

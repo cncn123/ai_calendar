@@ -10,8 +10,7 @@ struct CalendarView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 16) {
+            VStack(spacing: 16) {
                 // 顶部栏 - 包含标题和地区选择器
                 CalendarHeaderView(viewModel: viewModel)
                 
@@ -21,9 +20,8 @@ struct CalendarView: View {
                 // 当月所有节假日卡片
                 MonthlyHolidaysView(viewModel: viewModel)
                     .id("holidaysView")
-                }
-                .padding(.vertical)
             }
+            .padding(.vertical)
             .background(
                 // 添加渐变背景
                 LinearGradient(
