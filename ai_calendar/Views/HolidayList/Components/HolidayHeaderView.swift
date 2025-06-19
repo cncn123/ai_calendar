@@ -66,7 +66,6 @@ struct HolidayHeaderView: View {
             }
         }
         .padding(.horizontal)
-        .background(Color(.systemBackground))
         .padding(.vertical, 10)
     }
 } 

@@ -50,7 +50,6 @@ struct YearSelectorView: View {
             .padding()
         }
         .frame(maxWidth: .infinity)
-        .background(Color(.systemBackground))
     }
 }
 

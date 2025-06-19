@@ -4,6 +4,16 @@ import SwiftUI
 struct CalendarGridView: View {
     @ObservedObject var viewModel: CalendarViewModel
     
+    // 新增：定义枚举类型
+    enum CalendarGridItem: Hashable {
+        case weekDay(String)
+        case date(Date?)
+    }
+    
+    var gridItems: [CalendarGridItem] {
+        viewModel.weekDays.map { .weekDay($0) } + viewModel.daysInMonth().map { .date($0) }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             // 月份选择器
@@ -31,34 +41,33 @@ struct CalendarGridView: View {
             
             // 合并星期标题和日期网格
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 12) {
-                // 星期标题行
-                ForEach(viewModel.weekDays, id: \.self) { day in
-                    Text(day)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                }
-                
-                // 日期网格
-                ForEach(Array(viewModel.daysInMonth().enumerated()), id: \.offset) { _, date in
-                    if let date = date {
-                        DayCell(
-                            date: date,
-                            isSelected: viewModel.isSameDay(date, viewModel.selectedDate),
-                            holiday: viewModel.getHoliday(for: date),
-                            onTap: { viewModel.selectedDate = date },
-                            viewModel: viewModel
-                        )
-                    } else {
-                        Color.clear
-                            .aspectRatio(1, contentMode: .fit)
+                ForEach(gridItems, id: \.self) { item in
+                    switch item {
+                    case .weekDay(let day):
+                        Text(day)
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                    case .date(let date):
+                        if let date = date {
+                            DayCell(
+                                date: date,
+                                isSelected: viewModel.isSameDay(date, viewModel.selectedDate),
+                                holiday: viewModel.getHoliday(for: date),
+                                onTap: { viewModel.selectedDate = date },
+                                viewModel: viewModel
+                            )
+                        } else {
+                            Color.clear
+                                .aspectRatio(1, contentMode: .fit)
+                        }
                     }
                 }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 12)
-            .frame(height: 320)
+            .frame(height: 340)
         }
         .id("\(viewModel.currentYear)-\(viewModel.currentMonth)") // 保证月份改变时重新渲染
         .padding(.vertical, 12)

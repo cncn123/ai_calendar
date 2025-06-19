@@ -131,6 +131,10 @@ class CalendarViewModel: ObservableObject {
         if remainingCells < 7 {
             days.append(contentsOf: [Date?](repeating: nil, count: remainingCells))
         }
+        // 新增：补齐到6行（42个格子）
+        while days.count < 42 {
+            days.append(nil)
+        }
         
         // 更新缓存
         cachedDays = days

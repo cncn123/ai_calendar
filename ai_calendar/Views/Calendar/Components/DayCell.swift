@@ -80,13 +80,12 @@ struct DayCell: View {
                 VStack(spacing: 2) {
                     // 日期数字
                     if isMultiRegionHoliday && viewModel.selectedRegion == nil {
-                        // 多地区节假日时使用渐变色文本
                         ZStack {
                             Text("\(date.dayOfMonth)")
-                                .font(.system(size: 20, weight: isSelected ? .bold : .regular))
+                                .font(.system(size: 20, weight: .regular))
                                 .foregroundColor(.clear)
+                                .frame(width: 24, height: 24)
                             
-                            // 渐变色蒙版
                             LinearGradient(
                                 gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                 startPoint: .leading,
@@ -94,23 +93,32 @@ struct DayCell: View {
                             )
                             .mask(
                                 Text("\(date.dayOfMonth)")
-                                    .font(.system(size: 20, weight: isSelected ? .bold : .regular))
+                                    .font(.system(size: 20, weight: .regular))
+                                    .frame(width: 24, height: 24)
                             )
                         }
                     } else {
                         Text("\(date.dayOfMonth)")
-                            .font(.system(size: 20, weight: isSelected ? .bold : .regular))
+                            .font(.system(size: 20, weight: .regular))
                             .foregroundColor(holiday != nil ? getHolidayColor() : .primary)
+                            .frame(width: 24, height: 24)
+                            .overlay(
+                                isSelected ? 
+                                    Text("\(date.dayOfMonth)")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(holiday != nil ? getHolidayColor() : .primary)
+                                    : nil
+                            )
                     }
                     
                     if let holiday = holiday {
                         if isMultiRegionHoliday && viewModel.selectedRegion == nil {
-                            // 多地区节假日时，节假日名称用渐变色
                             ZStack {
                                 Text(holiday.name)
                                     .font(.system(size: 10))
                                     .foregroundColor(.clear)
                                     .lineLimit(1)
+                                    .frame(height: 12)
                                 LinearGradient(
                                     gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                     startPoint: .leading,
@@ -120,24 +128,24 @@ struct DayCell: View {
                                     Text(holiday.name)
                                         .font(.system(size: 10))
                                         .lineLimit(1)
+                                        .frame(height: 12)
                                 )
                             }
                         } else {
-                            // 单一地区节假日，正常显示
                             Text(holiday.name)
                                 .font(.system(size: 10))
                                 .foregroundColor(getHolidayColor())
                                 .lineLimit(1)
+                                .frame(height: 12)
                         }
                     } else if isMultiRegionHoliday && viewModel.selectedRegion == nil {
-                        // 多地区节假日时显示特殊提示，使用渐变色
                         ZStack {
                             Text("多地区")
                                 .font(.system(size: 8))
                                 .foregroundColor(.clear)
                                 .lineLimit(1)
+                                .frame(height: 12)
                             
-                            // 渐变色蒙版
                             LinearGradient(
                                 gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
                                 startPoint: .leading,
@@ -147,12 +155,18 @@ struct DayCell: View {
                                 Text("多地区")
                                     .font(.system(size: 8))
                                     .lineLimit(1)
+                                    .frame(height: 12)
                             )
                         }
+                    } else {
+                        // 添加一个空的占位符以保持布局稳定
+                        Color.clear
+                            .frame(height: 12)
                     }
                 }
                 .padding(4)
             }
+            .frame(width: 40, height: 40)
             .aspectRatio(1, contentMode: .fit)
         }
         .buttonStyle(PlainButtonStyle())

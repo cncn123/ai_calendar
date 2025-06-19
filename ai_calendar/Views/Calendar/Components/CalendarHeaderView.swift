@@ -14,7 +14,6 @@ struct CalendarHeaderView: View {
             regionSelector
         }
         .padding(.horizontal)
-//        .background(Color(.systemBackground))
         .padding(.vertical, 10)
     }
     

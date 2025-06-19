@@ -10,6 +10,8 @@ import SwiftUI
 struct HolidayListView: View {
     @StateObject private var viewModel = HolidayListViewModel()
     @State private var selectedYear: Int = Calendar.current.component(.year, from: Date())
+    @EnvironmentObject private var themeManager: ThemeManager
+    @Environment(\.colorScheme) private var colorScheme
     
     // 获取距离节假日的描述文本（已融合计算天数和文本描述）
     private func daysUntilHolidayText(_ holiday: Holiday) -> String {
@@ -31,10 +33,9 @@ struct HolidayListView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            VStack(spacing: 16) {
                 // 顶部栏
                 HolidayHeaderView(viewModel: viewModel)
-                    .padding(.top, 8)
                 
                 // 年份选择器
                 YearSelectorView(viewModel: viewModel, selectedYear: $selectedYear)
@@ -50,6 +51,18 @@ struct HolidayListView: View {
                     .padding(.vertical, 8)
                 }
             }
+            .padding(.vertical)
+            .background(
+                // 添加渐变背景
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.blue.opacity(colorScheme == .dark ? 0.15 : 0.05),
+                        Color.purple.opacity(colorScheme == .dark ? 0.15 : 0.05)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
             .navigationBarHidden(true)
         }
         .onAppear {
@@ -135,4 +148,5 @@ struct HolidayListView: View {
 
 #Preview {
     HolidayListView()
+        .environmentObject(ThemeManager())
 }
