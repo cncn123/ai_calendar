@@ -23,15 +23,55 @@ struct CalendarView: View {
             }
             .padding(.vertical)
             .background(
-                // 添加渐变背景
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.blue.opacity(colorScheme == .dark ? 0.15 : 0.05),
-                        Color.purple.opacity(colorScheme == .dark ? 0.15 : 0.05)
-                    ]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                // 根据主题选择弥散光斑背景
+                Group {
+                    if colorScheme == .dark {
+                        // 暗黑模式：深色系弥散背景
+                        ZStack {
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#2D1B69").opacity(0.6), .clear]),
+                                center: .topLeading,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#1B3B6F").opacity(0.6), .clear]),
+                                center: .bottomLeading,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#0F4C75").opacity(0.6), .clear]),
+                                center: .bottomTrailing,
+                                startRadius: 0,
+                                endRadius: 350
+                            )
+                        }
+                    } else {
+                        // 亮色模式：浅色系弥散背景
+                        ZStack {
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#FBE1FC").opacity(0.7), .clear]),
+                                center: .topLeading,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#F8EAE7").opacity(0.7), .clear]),
+                                center: .bottomLeading,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            RadialGradient(
+                                gradient: Gradient(colors: [Color(hex: "#7BD4FC").opacity(0.7), .clear]),
+                                center: .bottomTrailing,
+                                startRadius: 0,
+                                endRadius: 350
+                            )
+                        }
+                    }
+                }
+                .ignoresSafeArea()
             )
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)

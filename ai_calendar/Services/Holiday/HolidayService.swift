@@ -17,7 +17,7 @@ class HolidayService {
     ]
     
     // 支持的年份范围
-    private let supportedYearRange = 2023...2025
+    private let supportedYearRange = 2023...2026
     
     // 默认假日数据文件名
     private let hkHolidayFileTemplate = "hk_holidays_sc_%d"

@@ -84,7 +84,7 @@ struct DayCell: View {
                             Text("\(date.dayOfMonth)")
                                 .font(.system(size: 20, weight: .regular))
                                 .foregroundColor(.clear)
-                                .frame(width: 24, height: 24)
+                                .frame(width: 28, height: 24)
                             
                             LinearGradient(
                                 gradient: Gradient(colors: [AppColors.hongkongBlue, AppColors.mainlandRed]),
@@ -94,14 +94,14 @@ struct DayCell: View {
                             .mask(
                                 Text("\(date.dayOfMonth)")
                                     .font(.system(size: 20, weight: .regular))
-                                    .frame(width: 24, height: 24)
+                                    .frame(width: 28, height: 24)
                             )
                         }
                     } else {
                         Text("\(date.dayOfMonth)")
                             .font(.system(size: 20, weight: .regular))
                             .foregroundColor(holiday != nil ? getHolidayColor() : .primary)
-                            .frame(width: 24, height: 24)
+                            .frame(width: 28, height: 24)
                             .overlay(
                                 isSelected ? 
                                     Text("\(date.dayOfMonth)")
@@ -166,7 +166,7 @@ struct DayCell: View {
                 }
                 .padding(4)
             }
-            .frame(width: 40, height: 40)
+            .frame(width: 44, height: 44)
             .aspectRatio(1, contentMode: .fit)
         }
         .buttonStyle(PlainButtonStyle())
