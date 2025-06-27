@@ -23,51 +23,135 @@ struct CalendarView: View {
             }
             .padding(.vertical)
             .background(
-                // 根据主题选择弥散光斑背景
+                // iOS 16 风格的液体玻璃效果背景
                 Group {
                     if colorScheme == .dark {
-                        // 暗黑模式：深色系弥散背景
+                        // 暗黑模式液体玻璃效果
                         ZStack {
+                            // 深色基础渐变背景
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#1A1A2E").opacity(0.9),
+                                    Color(hex: "#16213E").opacity(0.8),
+                                    Color(hex: "#0F3460").opacity(0.7)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            
+                            // 深色液体玻璃光斑效果
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#2D1B69").opacity(0.6), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#2D1B69").opacity(0.4),
+                                    Color.clear
+                                ]),
                                 center: .topLeading,
                                 startRadius: 0,
-                                endRadius: 300
+                                endRadius: 400
                             )
+                            .blur(radius: 20)
+                            
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#1B3B6F").opacity(0.6), .clear]),
-                                center: .bottomLeading,
-                                startRadius: 0,
-                                endRadius: 300
-                            )
-                            RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#0F4C75").opacity(0.6), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#1B3B6F").opacity(0.3),
+                                    Color.clear
+                                ]),
                                 center: .bottomTrailing,
                                 startRadius: 0,
                                 endRadius: 350
                             )
+                            .blur(radius: 15)
+                            
+                            // 深色微妙光斑
+                            RadialGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#0F4C75").opacity(0.2),
+                                    Color.clear
+                                ]),
+                                center: .topTrailing,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            .blur(radius: 25)
+                            
+                            // 深色液体玻璃纹理层
+                            Rectangle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color.white.opacity(0.05),
+                                            Color.clear,
+                                            Color.white.opacity(0.02)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .blur(radius: 1)
                         }
                     } else {
-                        // 亮色模式：浅色系弥散背景
+                        // 亮色模式液体玻璃效果
                         ZStack {
+                            // 基础渐变背景
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#F0F8FF").opacity(0.8),
+                                    Color(hex: "#E6F3FF").opacity(0.6),
+                                    Color(hex: "#F5F0FF").opacity(0.7)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            
+                            // 液体玻璃光斑效果
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#FBE1FC").opacity(0.7), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color.white.opacity(0.3),
+                                    Color.clear
+                                ]),
                                 center: .topLeading,
                                 startRadius: 0,
-                                endRadius: 300
+                                endRadius: 400
                             )
+                            .blur(radius: 20)
+                            
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#F8EAE7").opacity(0.7), .clear]),
-                                center: .bottomLeading,
-                                startRadius: 0,
-                                endRadius: 300
-                            )
-                            RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#7BD4FC").opacity(0.7), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#E8F4FD").opacity(0.4),
+                                    Color.clear
+                                ]),
                                 center: .bottomTrailing,
                                 startRadius: 0,
                                 endRadius: 350
                             )
+                            .blur(radius: 15)
+                            
+                            // 微妙的色彩光斑
+                            RadialGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#F0E6FF").opacity(0.3),
+                                    Color.clear
+                                ]),
+                                center: .topTrailing,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            .blur(radius: 25)
+                            
+                            // 液体玻璃纹理层
+                            Rectangle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color.white.opacity(0.1),
+                                            Color.clear,
+                                            Color.white.opacity(0.05)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .blur(radius: 1)
                         }
                     }
                 }
@@ -76,7 +160,7 @@ struct CalendarView: View {
             .navigationBarHidden(true)
             .animation(.easeInOut, value: viewModel.selectedDate)
             .animation(.easeInOut, value: viewModel.selectedRegion)
-            .preferredColorScheme(themeManager.colorScheme)
+            .preferredColorScheme(themeManager.getCurrentColorScheme(for: colorScheme))
             .onAppear {
                 // 清除缓存并重新加载数据
                 HolidayService.shared.clearCache()

@@ -15,7 +15,7 @@ struct CalendarGridView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 4) {
             // 月份选择器
             HStack(spacing: 12) {
                 Button(action: viewModel.previousMonth) {

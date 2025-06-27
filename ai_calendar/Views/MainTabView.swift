@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     @State private var selectedTab = 0
     @EnvironmentObject private var themeManager: ThemeManager
+    @Environment(\.colorScheme) private var systemColorScheme
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -30,7 +31,7 @@ struct MainTabView: View {
                     Label(NSLocalizedString("settings", comment: "设置"), systemImage: "gear")
                 }
                 .tag(2)
-        }.preferredColorScheme(themeManager.colorScheme)
+        }.preferredColorScheme(themeManager.getCurrentColorScheme(for: systemColorScheme))
     }
 }
 

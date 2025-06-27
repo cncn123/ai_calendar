@@ -40,6 +40,7 @@ enum AppTheme: String, CaseIterable {
 class ThemeManager: ObservableObject {
     @Published var currentTheme: AppTheme {
         didSet {
+            print("主题已更改到: \(currentTheme.rawValue)") // 调试信息
             UserDefaults.standard.set(currentTheme.rawValue, forKey: "appTheme")
             withAnimation(.easeInOut(duration: 0.3)) {
                 colorScheme = currentTheme.colorScheme
@@ -65,6 +66,18 @@ class ThemeManager: ObservableObject {
         let nextIndex = (currentIndex + 1) % AppTheme.allCases.count
         currentTheme = AppTheme.allCases[nextIndex]
     }
+    
+    // 获取当前应该使用的主题
+    func getCurrentColorScheme(for systemScheme: ColorScheme) -> ColorScheme? {
+        switch currentTheme {
+        case .system:
+            return systemScheme
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
 }
 
 struct SettingsView: View {
@@ -74,57 +87,150 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // 根据主题选择弥散光斑背景
+                // iOS 16 风格的液体玻璃效果背景
                 Group {
-                    if systemColorScheme == .dark {
-                        // 暗黑模式：深色系弥散背景
+                    if themeManager.getCurrentColorScheme(for: systemColorScheme) == .dark {
+                        // 暗黑模式液体玻璃效果
                         ZStack {
+                            // 深色基础渐变背景
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#1A1A2E").opacity(0.9),
+                                    Color(hex: "#16213E").opacity(0.8),
+                                    Color(hex: "#0F3460").opacity(0.7)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            
+                            // 深色液体玻璃光斑效果
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#2D1B69").opacity(0.6), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#2D1B69").opacity(0.4),
+                                    Color.clear
+                                ]),
                                 center: .topLeading,
                                 startRadius: 0,
-                                endRadius: 300
+                                endRadius: 400
                             )
+                            .blur(radius: 20)
+                            
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#1B3B6F").opacity(0.6), .clear]),
-                                center: .bottomLeading,
-                                startRadius: 0,
-                                endRadius: 300
-                            )
-                            RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#0F4C75").opacity(0.6), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#1B3B6F").opacity(0.3),
+                                    Color.clear
+                                ]),
                                 center: .bottomTrailing,
                                 startRadius: 0,
                                 endRadius: 350
                             )
+                            .blur(radius: 15)
+                            
+                            // 深色微妙光斑
+                            RadialGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#0F4C75").opacity(0.2),
+                                    Color.clear
+                                ]),
+                                center: .topTrailing,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            .blur(radius: 25)
+                            
+                            // 深色液体玻璃纹理层
+                            Rectangle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color.white.opacity(0.05),
+                                            Color.clear,
+                                            Color.white.opacity(0.02)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .blur(radius: 1)
                         }
                     } else {
-                        // 亮色模式：浅色系弥散背景
+                        // 亮色模式液体玻璃效果
                         ZStack {
+                            // 基础渐变背景
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#F0F8FF").opacity(0.8),
+                                    Color(hex: "#E6F3FF").opacity(0.6),
+                                    Color(hex: "#F5F0FF").opacity(0.7)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                            
+                            // 液体玻璃光斑效果
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#FBE1FC").opacity(0.7), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color.white.opacity(0.3),
+                                    Color.clear
+                                ]),
                                 center: .topLeading,
                                 startRadius: 0,
-                                endRadius: 300
+                                endRadius: 400
                             )
+                            .blur(radius: 20)
+                            
                             RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#F8EAE7").opacity(0.7), .clear]),
-                                center: .bottomLeading,
-                                startRadius: 0,
-                                endRadius: 300
-                            )
-                            RadialGradient(
-                                gradient: Gradient(colors: [Color(hex: "#7BD4FC").opacity(0.7), .clear]),
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#E8F4FD").opacity(0.4),
+                                    Color.clear
+                                ]),
                                 center: .bottomTrailing,
                                 startRadius: 0,
                                 endRadius: 350
                             )
+                            .blur(radius: 15)
+                            
+                            // 微妙的色彩光斑
+                            RadialGradient(
+                                gradient: Gradient(colors: [
+                                    Color(hex: "#F0E6FF").opacity(0.3),
+                                    Color.clear
+                                ]),
+                                center: .topTrailing,
+                                startRadius: 0,
+                                endRadius: 300
+                            )
+                            .blur(radius: 25)
+                            
+                            // 液体玻璃纹理层
+                            Rectangle()
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [
+                                            Color.white.opacity(0.1),
+                                            Color.clear,
+                                            Color.white.opacity(0.05)
+                                        ]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .blur(radius: 1)
                         }
                     }
                 }
                 .ignoresSafeArea()
                 
                 VStack(spacing: 16) {
+                    // 当前主题状态显示（调试用）
+                    HStack {
+                        Text("当前主题: \(themeManager.currentTheme.rawValue)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    
                     // 外观设置 Section
                     VStack(alignment: .leading, spacing: 8) {
                         Text(NSLocalizedString("appearance", comment: "外观设置"))
@@ -135,7 +241,8 @@ struct SettingsView: View {
                         ForEach(Array(AppTheme.allCases.enumerated()), id: \.element) { index, theme in
                             VStack(spacing: 0) {
                                 Button(action: {
-                                    withAnimation {
+                                    print("切换主题到: \(theme.rawValue)") // 调试信息
+                                    withAnimation(.easeInOut(duration: 0.3)) {
                                         themeManager.currentTheme = theme
                                     }
                                 }) {
@@ -232,9 +339,10 @@ struct SettingsView: View {
                 .padding(.horizontal)
                 .padding(.top, 12) // 改为顶部内边距
                 .navigationTitle(NSLocalizedString("settings", comment: "设置"))
-                .preferredColorScheme(themeManager.colorScheme)
+                .preferredColorScheme(themeManager.getCurrentColorScheme(for: systemColorScheme))
             }
         }
+        .id("settings-\(themeManager.currentTheme.rawValue)") // 强制重新渲染
     }
 }
 

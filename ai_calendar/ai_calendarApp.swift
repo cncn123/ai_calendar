@@ -10,12 +10,13 @@ import SwiftUI
 @main
 struct ai_calendarApp: App {
     @StateObject private var themeManager = ThemeManager()
+    @Environment(\.colorScheme) private var systemColorScheme
     
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
                 .environmentObject(themeManager)
-                .preferredColorScheme(themeManager.colorScheme)
+                .preferredColorScheme(themeManager.getCurrentColorScheme(for: systemColorScheme))
         }
     }
 }
